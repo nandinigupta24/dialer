@@ -1,0 +1,70 @@
+ADMIN|FAIL|2019-09-24 11:53:47|AnkitK|BAD|103.113.104.66|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36|
+ADMIN|FAIL|2019-10-15 08:53:12|9898|BAD|14.98.72.66|Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-20 21:02:21|2010|BAD|113.30.164.50|Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0|
+ADMIN|FAIL|2019-10-24 14:51:06|Ascend02|BAD|14.98.72.66|Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-24 17:14:53|9898|BAD|14.98.72.66|Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3223.0 Safari/537.36|
+ADMIN|FAIL|2019-10-25 10:29:21|Ascend01|LOCK|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3235.0 Safari/537.36|
+ADMIN|FAIL|2019-10-25 10:29:34|Ascend01|LOCK|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3235.0 Safari/537.36|
+ADMIN|FAIL|2019-10-25 10:29:45|Ascend01|LOCK|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3235.0 Safari/537.36|
+ADMIN|FAIL|2019-10-25 10:30:02|Ascend01|LOCK|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3235.0 Safari/537.36|
+ADMIN|FAIL|2019-10-25 10:30:19|Ascend01|LOCK|14.98.72.66|Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-25 10:30:34|Ascend01|LOCK|14.98.72.66|Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-25 10:30:39|Ascend01|LOCK|14.98.72.66|Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-25 10:30:54|Ascend01|LOCK|14.98.72.66|Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-25 11:12:33|Ascend01|LOCK|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-25 11:12:48|Ascend01|LOCK|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-25 11:13:16|Ascend01|LOCK|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-25 11:16:04|Ascend01|LOCK|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-25 11:16:19|Ascend01|LOCK|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-25 11:16:34|Ascend01|LOCK|14.98.72.66|Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-25 11:16:35|9898|BAD|14.98.72.66|Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-25 11:16:40|Ascend01|LOCK|14.98.72.66|Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-25 11:34:34|Ascend01|LOCK|14.98.72.66|Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-25 11:34:48|Ascend01|LOCK|14.98.72.66|Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-25 11:35:05|Ascend01|LOCK|14.98.72.66|Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-25 11:58:39|Ascend01|LOCK|203.110.90.230|Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-25 11:58:41|Ascend01|LOCK|203.110.90.230|Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-25 11:58:41|Ascend01|LOCK|203.110.90.230|Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-25 11:58:41|Ascend01|LOCK|203.110.90.230|Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-25 11:58:42|Ascend01|LOCK|203.110.90.230|Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-25 12:02:28|Ascend01|LOCK|14.98.72.66|Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36|
+ADMIN|FAIL|2019-10-25 12:02:38|Ascend01|LOCK|14.98.72.66|Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36|
+ADMIN|FAIL|2019-10-25 12:02:38|Ascend01|LOCK|203.110.90.230|Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-25 12:02:39|Ascend01|LOCK|203.110.90.230|Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-25 12:02:39|Ascend01|LOCK|203.110.90.230|Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-25 16:51:50|Ascend03|BAD|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-25 16:52:12|Ascend03|BAD|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-25 16:54:39|Ascend03|BAD|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-25 16:55:02|Ascend03|BAD|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-28 08:58:15|3002|BAD|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-28 08:58:44|3002|BAD|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-28 08:59:12|3002|BAD|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-28 09:03:58|3001|BAD|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36|
+ADMIN|FAIL|2019-10-28 11:09:02|3002|BAD|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-28 12:02:45|9898|BAD|203.110.90.230|Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-28 12:51:08|3004|BAD|123.201.100.156|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-28 12:51:08|3002|BAD|123.201.100.156|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-28 13:02:36|3004|BAD|123.201.100.156|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-28 14:20:53|3004|BAD|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-28 15:46:31|9898|BAD|203.110.90.230|Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-29 09:04:01|3004|BAD|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-29 09:04:17|3004|BAD|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-29 09:49:35|3004|BAD|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-29 09:49:49|3004|BAD|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-29 09:50:05|3004|BAD|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-29 09:50:20|3004|BAD|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-29 09:50:27|3004|BAD|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-29 09:50:37|3004|BAD|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-29 10:11:46|3004|BAD|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36|
+ADMIN|FAIL|2019-10-29 10:12:01|3004|BAD|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36|
+ADMIN|FAIL|2019-10-29 13:31:20|3003|BAD|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-29 13:31:39|3003|BAD|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-29 13:31:48|3003|BAD|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36|
+ADMIN|FAIL|2019-10-30 09:05:34|3003|BAD|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36|
+ADMIN|FAIL|2019-10-30 11:33:40|3005|BAD|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36|
+ADMIN|FAIL|2019-10-30 11:33:45|3005|BAD|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36|
+ADMIN|FAIL|2019-10-30 14:31:35|3005|BAD|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36|
+ADMIN|FAIL|2019-10-30 14:31:39|3005|BAD|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36|
+ADMIN|FAIL|2019-10-31 15:16:05|3002|BAD|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36|
+ADMIN|FAIL|2019-10-31 15:19:07|3004|BAD|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36|
+ADMIN|FAIL|2019-11-01 11:10:03|Ascend03|BAD|27.106.39.86|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.87 Safari/537.36|

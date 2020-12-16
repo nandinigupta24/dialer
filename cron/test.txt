@@ -1,0 +1,35 @@
+Table
+Name :- email_reports
+
+Column----
+id:- 
+name:- 
+description:- text
+report:- text
+type:- 45 
+recipients:- Longtext
+weekends:- YES or NO
+attachment_type:- HTML or CSV
+status:- Y or N
+created_at:- Timestamp
+updated_at:- datetime
+
+
+Subject :- Auto Email Report
+
+URL:- https://cogentomni.usethegeeks.com/admin/reports.php?ADD=6000
+
+Create & Listings ONLY
+
+
+
+SELECT VU.user,VU.pass,VU.full_name,VU.user_level,VU.user_group 
+FROM 
+vicidial_users VU
+JOIN vicidial_user_groups VUG
+ON
+VU.user_group = VUG.user_group
+
+
+
+ admin@moeahm83
