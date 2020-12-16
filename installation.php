@@ -90,7 +90,6 @@
 				}
 	
                 $link = mysqli_connect($server_string, "$DBUser", "$DBPass", "asterisk", $VARDB_port);
-                die($link);
 
                 /* Delete Index HTML */
                 unlink("index.html");
