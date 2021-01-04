@@ -24,11 +24,11 @@
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
                 <li class="dropdown-toggle1 list-style" title="Agent"><a href="/agent" target="_blank"><i
-                            class="fa fa-phone text-green3"></i></a> 
+                            class="fa fa-phone text-green3"></i></a>
                 </li>
                 <?php if(!empty($_SESSION['CurrentLogin']['view_reports']) && $_SESSION['CurrentLogin']['view_reports'] == 1){?>
                 <li class="dropdown-toggle1 list-style" title="Reports"><a href="<?php echo base_url_reports('reports/outbound/summary')?>" target="_blank"><i
-                            class="fa fa-bar-chart text-blue3"></i></a> 
+                            class="fa fa-bar-chart text-blue3"></i></a>
                 </li>
                 <?php }?>
                 <li class="dropdown-toggle1 list-style" title="Realtime Reports"><a href="<?php echo base_url_reports('reports/realtime')?>" target="_blank"><i
@@ -55,7 +55,7 @@
                         <li class="user-body">
                             <div class="row no-gutters">
                                 <div class="col-12 text-left">
-                                    <a href="#"><i class="ion ion-person"></i> Lock Screen</a>
+                                    <a href="<?php echo base_url('lock')?>"><i class="ion ion-person"></i> Lock Screen</a>
                                 </div>
                                 <div class="col-12 text-left">
                                     <a href="<?php echo base_url('logout')?>"><i class="fa fa-power-off"></i> Logout</a>

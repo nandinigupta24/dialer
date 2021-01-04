@@ -1,5 +1,11 @@
 <?php
 $adminInterfaceEnable = 0;
+
+if(!isset($_SESSION['CurrentLogin']['Lock'])) {
+  header('location: /utgone/lock');
+  exit;
+}
+
 if (!empty($_SESSION['CurrentLogin']['view_reports']) && $_SESSION['CurrentLogin']['view_reports'] == 1) {
     $adminInterfaceEnable = 1;
 }
@@ -20,7 +26,7 @@ if (!empty($_SESSION['CurrentLogin']['user_level']) && $_SESSION['CurrentLogin']
 #id = SEO0038
 if(!empty($_SESSION['CurrentLogin']['user']) && in_array($_SESSION['CurrentLogin']['user'],['SEO0038','SEO0039'])){
         header('location:../reports/call/recordings');
-        exit;  
+        exit;
 }
 
 ?>
@@ -101,15 +107,15 @@ if(!empty($_SESSION['CurrentLogin']['user']) && in_array($_SESSION['CurrentLogin
         </div>
             <!-- particles.js container -->
             <?php if(!empty($_GET['plan']) && $_GET['plan'] == 'expired'){?>
-                <div class="myadmin-alert myadmin-alert-icon myadmin-alert-click alert-danger myadmin-alert-top alerttop" style="display:block;"> 
-                    <i class="ti-user"></i> 
+                <div class="myadmin-alert myadmin-alert-icon myadmin-alert-click alert-danger myadmin-alert-top alerttop" style="display:block;">
+                    <i class="ti-user"></i>
                     Your plan has been expired,so you can not login as agent
                 </div>
             <!--<div class="myadmin-alert myadmin-alert-icon myadmin-alert-click alert-danger myadmin-alert-bottom alertbottom" style="display:block;"> <i class="ti-user"></i> This is an example top alert. You can edit what u wish. <a href="#" class="closed">&times;</a> </div>-->
             <?php }?>
             <?php if(!empty($_GET['plan']) && $_GET['plan'] == 'more_agent'){?>
-                <div class="myadmin-alert myadmin-alert-icon myadmin-alert-click alert-danger myadmin-alert-top alerttop" style="display:block;"> 
-                    <i class="ti-user"></i> 
+                <div class="myadmin-alert myadmin-alert-icon myadmin-alert-click alert-danger myadmin-alert-top alerttop" style="display:block;">
+                    <i class="ti-user"></i>
                     Your plan has no more agent login permission!!
                 </div>
             <!--<div class="myadmin-alert myadmin-alert-icon myadmin-alert-click alert-danger myadmin-alert-bottom alertbottom" style="display:block;"> <i class="ti-user"></i> This is an example top alert. You can edit what u wish. <a href="#" class="closed">&times;</a> </div>-->

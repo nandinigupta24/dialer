@@ -7,8 +7,18 @@ if($pathUrl[0]=='checklogin') {
   if(isset($_SESSION['Login']['user'])) echo 1; die;
   echo 0; die;
 }
+if($pathUrl[0]=='checklock') {
+  if(isset($_SESSION['CurrentLogin']['Lock'])) {
+    echo 1; die;
+  } else {
+    echo 0; die;
+  }
+}
 if(!isset($_SESSION['Login']['user']) && $pathUrl[0]!='login') {
     redirect('login', 1);
+}
+if(!isset($_SESSION['CurrentLogin']['Lock']) && $pathUrl[0]!='lock') {
+    redirect('lock', 1);
 }
 if(isset($_SESSION['Login']['user']) && $_SESSION['Login']['user']) {
     include('includes/variables.php');
@@ -23,7 +33,7 @@ if(isset($pathUrl[0]) && $pathUrl[0]) {
     $module = $pathUrl[0];
     $file = isset($pathUrl[1]) ? $pathUrl[1] : '';
     $layout = true;
-    if(in_array($module, ['login', 'welcome', 'logout'])) {
+    if(in_array($module, ['login', 'welcome', 'logout', 'lock'])) {
         if(isset($_SESSION['Login']['user']) && $module=='login') {
             redirect('welcome', 1);
         }
@@ -31,6 +41,9 @@ if(isset($pathUrl[0]) && $pathUrl[0]) {
             unset($_SESSION['Login'],$_SESSION['role'],$_SESSION['CurrentLogin']);
             session_destroy();
             redirect('login', 1);
+        } if($module=='lock') {
+            unset($_SESSION['CurrentLogin']['Lock']);
+            redirect('lock', 1);
         }
         $module = 'auth';
         $file = $pathUrl[0];
@@ -59,7 +72,9 @@ if(isset($pathUrl[0]) && $pathUrl[0]) {
 }else {
     if(isset($_SESSION['Login']['user']) && $_SESSION['Login']['user']) {
         redirect('welcome', 1);
-    }else{
+    } elseif(!isset($_SESSION['CurrentLogin']['Lock'])) {
+        redirect('lock', 1);
+    } else{
         redirect('login', 1);
     }
 }

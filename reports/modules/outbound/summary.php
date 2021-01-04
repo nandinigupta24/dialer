@@ -111,7 +111,7 @@
           'This Month'  : [moment().startOf('month'), moment().endOf('month')],
           'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
         },
-        startDate: moment().subtract(29, 'days'),
+        startDate: moment(),
         endDate  : moment()
       },
       function (start, end) {

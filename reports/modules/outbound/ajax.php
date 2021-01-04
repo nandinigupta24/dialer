@@ -145,7 +145,7 @@ from
         "data" => $data
     );
 } elseif ($_GET['rule'] == 'InboundSummary') {
-    $query = "select a.Emails,a.Chats,CONCAT(a.full_name,' (',a.user,')') as AgentName,a.user_group,a.Calls,a.Connects,ROUND(a.Connects/a.Calls*100,2) as ConnectRate,a.DMCs,ROUND(a.DMCs/a.Connects*100,2) as DMCRate,a.Sales,a.Completed,ROUND(a.Sales/a.DMCs*100,2) as ConversionRate,a.ManDials,a.Drops,ROUND(a.Drops/a.Connects*100,2) as DropRate,a.A,
+    $query = "select a.Emails,a.Chats,CONCAT(a.full_name,' (',a.user,')') as AgentName,a.user,a.user_group,a.Calls,a.Connects,ROUND(a.Connects/a.Calls*100,2) as ConnectRate,a.DMCs,ROUND(a.DMCs/a.Connects*100,2) as DMCRate,a.Sales,a.Completed,ROUND(a.Sales/a.DMCs*100,2) as ConversionRate,a.ManDials,a.Drops,ROUND(a.Drops/a.Connects*100,2) as DropRate,a.A,
 sec_to_time(b.talk) as TalkTime,sec_to_time(b.Pause) as PauseTime,sec_to_time(b.Wait) as WaitTime,sec_to_time(b.Dispo) as DispoTime from
 (select VL.user as user,VU.full_name as full_name,VL.user_group as user_group,
 sum(case when VL.status is not null then 1 else 0 end) as Calls,

@@ -220,6 +220,7 @@
                                         <li><a href="<?php echo base_url('settings/server') ?>"><i class="fa fa-server"></i>Servers</a></li>
                                         <li><a href="<?php echo base_url('settings/pages') ?>"><i class="fa fa-file"></i>Agent Screen Setting</a></li>
                                         <li><a href="<?php echo base_url('settings/systems') ?>"><i class="fa fa-desktop"></i>System</a></li>
+                                        <li><a href="<?php echo base_url('settings/email_setting') ?>"><i class="fa fa-envelope"></i>Email Setting</a></li>
                                         <li><a href="<?php echo base_url('settings/chat') ?>"><i class="fa fa-comments-o"></i>Chat</a></li>
                                         <li><a href="<?php echo base_url('pricing') ?>"><i class="fa fa-money"></i>Pricing Plan</a></li>
                                         <li><a href="<?php echo base_url('licensing') ?>"><i class="fa fa-id-card"></i>Licensing</a></li>

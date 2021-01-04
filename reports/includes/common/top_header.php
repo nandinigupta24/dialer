@@ -18,16 +18,16 @@
     </a>
     <!-- Header Navbar -->
     <nav class="navbar navbar-static-top">
-        <!-- Sidebar toggle button--> 
+        <!-- Sidebar toggle button-->
         <div>
         </div>
         <div class="navbar-custom-menu">
             <?php if (!empty($_SESSION['CurrentLogin']['user']) && in_array($_SESSION['CurrentLogin']['user'], ['SEO0038','SEO0039'])) { ?>
 
                 <ul class="nav navbar-nav">
-                    
+
                      <li class="dropdown-toggle1" title="Realtime Reports"><a href="<?php echo base_url_reports('reports/realtime'); ?>" target="_blank"><i
-                                    class="fa fa-pie-chart text-red2"></i></a> 
+                                    class="fa fa-pie-chart text-red2"></i></a>
                         </li>
                     <!-- User Account-->
                     <li class="dropdown user user-menu list-style">
@@ -48,7 +48,7 @@
                             <li class="user-body">
                                 <div class="row no-gutters">
                                     <div class="col-12 text-left">
-                                        <a href="#"><i class="ion ion-person"></i> Lock Screen</a>
+                                        <a href="<?php echo base_url('lock')?>"><i class="ion ion-person"></i> Lock Screen</a>
                                     </div>
                                     <div class="col-12 text-left">
                                         <a href="<?php echo base_url('logout') ?>"><i class="fa fa-power-off"></i> Logout</a>
@@ -67,12 +67,12 @@
                                 class="fa fa-phone text-green3"></i></a> </li>
                         <?php if (!empty($_SESSION['CurrentLogin']['admin_interface_enable']) && $_SESSION['CurrentLogin']['admin_interface_enable'] == 1) { ?>
                         <li class="dropdown-toggle1" title="Admin"><a href="<?php echo base_url_reports('utgone/campaigns') ?>" target="_blank">
-                                <i class="fa fa-gears text-blue3"></i></a> 
+                                <i class="fa fa-gears text-blue3"></i></a>
                         </li>
                     <?php } ?>
                     <?php if (!empty($_SESSION['CurrentLogin']['view_reports']) && $_SESSION['CurrentLogin']['view_reports'] == 1) { ?>
                         <li class="dropdown-toggle1" title="Realtime Reports"><a href="<?php echo base_url_reports('reports/realtime'); ?>" target="_blank"><i
-                                    class="fa fa-pie-chart text-red2"></i></a> 
+                                    class="fa fa-pie-chart text-red2"></i></a>
                         </li>
                     <?php } ?>
                     <li class="dropdown-toggle1" title="Support Dashboard"><a
@@ -97,7 +97,7 @@
                             <li class="user-body">
                                 <div class="row no-gutters">
                                     <div class="col-12 text-left">
-                                        <a href="#"><i class="ion ion-person"></i> Lock Screen</a>
+                                        <a href="<?php echo base_url('lock')?>"><i class="ion ion-person"></i> Lock Screen</a>
                                     </div>
                                     <div class="col-12 text-left">
                                         <a href="<?php echo base_url('logout') ?>"><i class="fa fa-power-off"></i> Logout</a>

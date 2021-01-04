@@ -6,11 +6,11 @@ if (!empty($_GET['start']) && !empty($_GET['end'])) {
     $end = $_GET['end'];
 }
 $SearchArray = [];
-$SearchArray['AND']['vicidial_log.user'] = $AgentID;
-$SearchArray['AND']['vicidial_log.call_date[>=]'] = $start.' 00:00:00';
-$SearchArray['AND']['vicidial_log.call_date[<=]'] = $end.' 23:59:59';
-$SelectArray = ['vicidial_log.user','vicidial_log.call_date','vicidial_log.campaign_id','vicidial_log.lead_id','vicidial_log.status','vicidial_log.length_in_sec','vicidial_list.phone_number','vicidial_list.list_id'];
-$report = $database->select('vicidial_log',['[>]vicidial_list'=>['lead_id'=>'lead_id']],$SelectArray,$SearchArray);
+$SearchArray['AND']['vicidial_closer_log.user'] = $AgentID;
+$SearchArray['AND']['vicidial_closer_log.call_date[>=]'] = $start.' 00:00:00';
+$SearchArray['AND']['vicidial_closer_log.call_date[<=]'] = $end.' 23:59:59';
+$SelectArray = ['vicidial_closer_log.user','vicidial_closer_log.call_date','vicidial_closer_log.campaign_id','vicidial_closer_log.lead_id','vicidial_closer_log.status','vicidial_closer_log.length_in_sec','vicidial_list.phone_number','vicidial_list.list_id'];
+$report = $database->select('vicidial_closer_log',['[>]vicidial_list'=>['lead_id'=>'lead_id']],$SelectArray,$SearchArray);
 
 
 ?>
@@ -20,7 +20,7 @@ $report = $database->select('vicidial_log',['[>]vicidial_list'=>['lead_id'=>'lea
         <!-- Default box -->
         <div class="panel">
             <div class="panel-heading">
-                <span class="panel-title"><i class="fa fa-list-alt"></i> Agent Campaign Outbound Summary Report</span>
+                <span class="panel-title"><i class="fa fa-list-alt"></i> Agent Campaign Inbound Summary Report</span>
                 <ul class="nav panel-tabs">
                     <li> <a type="button" id="daterange-btn">
                             <span>

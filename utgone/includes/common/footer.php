@@ -46,6 +46,18 @@ setInterval(function(){
   });
 }, 10000);
 
+setInterval(function(){
+  $.ajax({
+      type: "POST",
+      url: '<?php echo base_url('checklock') ?>',
+      success: function (data) {
+          if(data==0) {
+            window.location.href = '/utgone/lock';
+          }
+      }
+  });
+}, 10000);
+
 </script>
 
 <?php
