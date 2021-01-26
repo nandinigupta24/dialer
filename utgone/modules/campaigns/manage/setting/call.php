@@ -7,7 +7,7 @@
         <div class="form-group">
             <label>Calling Method:</label>
             <select class="form-control manage-field-select" data-name="dial_method" data-id="<?php echo $CampaignDetail['campaign_id']; ?>" style="width: 100%;">
-                <?php 
+                <?php
                 $DialMethodList = ["RATIO" => 'Auto Dial', "INBOUND_MAN" => 'Inbound', 'MANUAL' => 'Manual Dial', 'ADAPT_TAPERED' => 'Predictive Dial'];
                 foreach($DialMethodList as $k=>$v){
                 ?>
@@ -42,7 +42,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="dial_timeout">Calling timeout:(<span class="text-success">If you are having a lot of Answering Machine or Voice mail calls you may want to try 
+            <label for="dial_timeout">Calling timeout:(<span class="text-success">If you are having a lot of Answering Machine or Voice mail calls you may want to try
 changing this value to between 19-26</span>)</label>
             <div class="row">
                 <div class="col-md-10">
@@ -256,6 +256,6 @@ changing this value to between 19-26</span>)</label>
 <!--- BOX tab inner-contant -- Call startgy-->
 <!--<script>
 $(document).ready(function(){
-    $('[data-toggle="popover"]').popover();   
+    $('[data-toggle="popover"]').popover();
 });
 </script>-->

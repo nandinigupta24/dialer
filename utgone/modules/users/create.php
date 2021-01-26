@@ -224,10 +224,10 @@
                                                                 <div class="form-group row">
                                                                     <label for="closer_default_blended" class="col-lg-4">Agent API Access</label>
                                                                     <div class="col-lg-2">
-                                                                        <button type="button" class="btn btn-sm btn-toggle btn-success SwitchUserSetting" data-toggle="button" aria-pressed="true" autocomplete="off" data-field="vdc_agent_api_access">
+                                                                        <button type="button" class="btn btn-sm btn-toggle btn-success SwitchUserSetting" data-toggle="button" aria-pressed="true" autocomplete="off" data-field="vdc_agent_api_access" >
                                                                             <div class="handle"></div>
                                                                         </button>
-                                                                        <input type="hidden" class="" name="vdc_agent_api_access" value="0"/>
+                                                                        <input type="hidden" class="" name="vdc_agent_api_access" value="0"  />
                                                                     </div>
 
                                                                     <label for="closer_default_blended" class="col-lg-4">API Only User</label>
@@ -238,6 +238,39 @@
                                                                         <input type="hidden" class="" name="api_only_user" value="0"/>
                                                                     </div>
                                                                 </div>
+
+                                                                <div class="form-group row vdc_agent_api_access hide">
+
+                                                                    <label for="api_token" class="col-lg-4">Agent API Access Token</label>
+                                                                    <div class="col-lg-7">
+                                                                        <input id="api_token" name="api_token" type="text" class="form-control" readonly value="">
+                                                                    </div>
+                                                                    <div class="col-lg-1 p-0">
+                                                                      <button type="button" class="btn btn-light" name="button" onclick="copyApiToken()"><i class="fa fa-copy"></i></button>
+                                                                    </div>
+                                                                  </div>
+                                                                  <div class="form-group row vdc_agent_api_access hide">
+
+                                                                    <label for="api_ip_list" class="col-lg-4">Agent API Access IP's</label>
+                                                                    <div class="col-lg-8">
+                                                                        <input id="api_ip_list" name="api_ip_list" type="text" class="form-control">
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="form-group row vdc_agent_api_access hide">
+                                                                  <label for="api_start_date" class="col-lg-4">Agent API Access Start</label>
+                                                                  <div class="col-lg-4">
+                                                                      <input id="api_start_date" name="api_start_date" type="date" class="form-control" >
+                                                                  </div>
+                                                                  </div>
+                                                                  <div class="form-group row vdc_agent_api_access hide">
+                                                                  <label for="api_end_date" class="col-lg-4">Agent API Access End</label>
+                                                                  <div class="col-lg-4">
+                                                                      <input id="api_end_date" name="api_end_date" type="date" class="form-control">
+                                                                  </div>
+                                                                  </div>
+
+
                                                                     </div>
 
                                                                 </div>
@@ -432,6 +465,19 @@ $(document).on('click','.SwitchUserSetting',function(){
 
    var FieldName = $(this).data('field');
    $(this).parent().find('input[name="'+FieldName+'"]').val(value);
+
+   if(FieldName=='vdc_agent_api_access' && value==1) {
+      $('.'+FieldName).toggleClass('hide');
+      $.ajax({
+             type: "GET",
+             url: '<?php echo base_url('users/ajax')?>?rule=token',
+             success: function(data)
+             {
+                  data = $.trim(data);
+                  $('#api_token').val(data);
+             }
+     });
+   }
 });
 
 
@@ -453,7 +499,21 @@ $(document).on('change','#user_level',function(){
    }
 });
 
-
+var copyApiToken = function(){
+    var copyText = document.getElementById("api_token");
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); /* For mobile devices */
+    document.execCommand("copy");
+    $.toast({
+        heading: 'Copied!',
+        text: '',
+        position: 'top-right',
+        loaderBg: '#ff6849',
+        icon: 'info',
+        hideAfter: 1500,
+        showHideTransition: 'plain',
+    });
+}
 
 
 

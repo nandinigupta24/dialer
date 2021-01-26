@@ -14501,6 +14501,7 @@ if ( ($ACTION == 'VDADpause') or ($ACTION == 'VDADready') or ($pause_trigger == 
 			$VLAaffected_rows=0;
 			$vla_lead_wipeSQL='';
 			$vla_where_SQL='';
+			$vla_ring_resetSQL = isset($vla_ring_resetSQL) ? $vla_ring_resetSQL : '';
 			if ($ACTION == 'VDADready')
 				{
 				$vla_lead_wipeSQL = ",lead_id=0";

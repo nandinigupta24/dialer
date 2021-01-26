@@ -115,7 +115,7 @@
                 <div class="input-group-addon">
                     <i class="fa fa-barcode"></i>
                 </div>
-                <input type="time" class="form-control" name="email_time" step="1"  value="<?php echo $data['email_time']; ?>"/>
+                <input type="time" class="form-control" name="email_time" value="<?php echo $data['email_time']; ?>"/>
             </div>
             <!-- /.input group -->
         </div>

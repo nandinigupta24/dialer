@@ -48,7 +48,7 @@
                             <li class="user-body">
                                 <div class="row no-gutters">
                                     <div class="col-12 text-left">
-                                        <a href="<?php echo base_url('lock')?>"><i class="ion ion-person"></i> Lock Screen</a>
+                                        <a href="#" class="lock_screen"><i class="ion ion-person"></i> Lock Screen</a>
                                     </div>
                                     <div class="col-12 text-left">
                                         <a href="<?php echo base_url('logout') ?>"><i class="fa fa-power-off"></i> Logout</a>
@@ -97,7 +97,7 @@
                             <li class="user-body">
                                 <div class="row no-gutters">
                                     <div class="col-12 text-left">
-                                        <a href="<?php echo base_url('lock')?>"><i class="ion ion-person"></i> Lock Screen</a>
+                                        <a href="#" class="lock_screen"><i class="ion ion-person"></i> Lock Screen</a>
                                     </div>
                                     <div class="col-12 text-left">
                                         <a href="<?php echo base_url('logout') ?>"><i class="fa fa-power-off"></i> Logout</a>

@@ -25,7 +25,8 @@ if(isset($_GET['method'])){
         die('Follow');
     }
 }
-$arrayRule = ['add', 'copy', 'listing', 'update', 'delete', 'Tables', 'user_role_create', 'user_role_delete', 'user_role_setting', 'user_role_permission', 'user_role_user', 'AudioUpload', 'TemplateSave', 'leadUpdate','leadCustomUpdate','leadOutboundUpdate','leadInboundUpdate','SendMessage','TransferCallback','ReleaseCallback'];
+$arrayRule = ['add', 'copy', 'listing', 'update', 'delete', 'Tables', 'user_role_create', 'user_role_delete', 'user_role_setting', 'user_role_permission', 'user_role_user', 'AudioUpload', 'TemplateSave', 'leadUpdate','leadCustomUpdate','leadOutboundUpdate','leadInboundUpdate','SendMessage','TransferCallback',
+'ReleaseCallback', 'token'];
 
 $table = 'vicidial_users';
 
@@ -47,6 +48,11 @@ if (!empty($_GET['rule']) && in_array($_GET['rule'], $arrayRule)) {
         $VicidialRecording = $_POST['vicidial_recording'];
         $RoleID = $_POST['role_id'];
         $UserLevel = $_POST['user_level'];
+        $api_token = $_POST['api_token'];
+        $api_ip_list = $_POST['api_ip_list'];
+        $api_start_date = $_POST['api_start_date'];
+        $api_end_date = $_POST['api_end_date'];
+
         $resultReponse = get_plan_agents($UserGroup,$database,$DBUTG);
         if($resultReponse == 'failed'){
             $response = response(0,1, 'This group has no more permissions to create agent!!',NULL);
@@ -86,6 +92,10 @@ if (!empty($_GET['rule']) && in_array($_GET['rule'], $arrayRule)) {
             $arrayInsert['custom_one'] = $_POST['custom_one'];
             $arrayInsert['role_id'] = $RoleID;
             $arrayInsert['user_level'] = $UserLevel;
+            $arrayInsert['api_token'] = trim($api_token);
+            $arrayInsert['api_ip_list'] = $api_ip_list;
+            $arrayInsert['api_start_date'] = $api_start_date;
+            $arrayInsert['api_end_date'] = $api_end_date;
 
             if($UserLevel == 8 || $UserLevel == 7){
                 //$arrayInsert['vdc_agent_api_access'] = 1;
@@ -279,10 +289,10 @@ if (!empty($_GET['rule']) && in_array($_GET['rule'], $arrayRule)) {
             }elseif($FieldName == 'phone_login'){
                 $result = $database->update($table, ['phone_pass' => $FieldValue], ['user_id' => $Condition]);
             }
-            $result = $database->update($table, [$FieldName => $FieldValue], ['user_id' => $Condition]);
+            $result = $database->update($table, [$FieldName => trim($FieldValue)], ['user_id' => $Condition]);
 
             if ($result->rowCount() > 0) {
-                $response = response(1, 0, 'Your user has been successfully updated!!', NULL);
+                $response = response(1, 0, 'Successfully updated!!', NULL);
             } else {
                 $response = response(0, 1, 'Oops!! No Updated!!', NULL);
             }
@@ -634,6 +644,16 @@ if (!empty($_GET['rule']) && in_array($_GET['rule'], $arrayRule)) {
 
         admin_log_insert($database,@$_SESSION['Login']['user'],'CALLBACKS','DELETE',$UserID,'DELETE-CALLBACKS',$database->last(),'DELETE CALLBACKS','--All--');
 
+    }elseif($_GET['rule'] == 'token'){
+        $length = 30;
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        echo $randomString;
+        die;
     }
 
     echo json_encode($response);

@@ -1,5 +1,6 @@
 <script language="Javascript">
         var DTMFKeypad = '<?php echo (isset($DTMFKeypad) ? $DTMFKeypad : '');?>';
+        var inbound_call_popup = '<?php echo $inbound_call_popup ?>';
 	var StatusMan = '';
 	var needToConfirmExit = true;
 	var MTvar;
@@ -555,7 +556,7 @@ if ($enable_fast_refresh < 1) {echo "\tvar refresh_interval = 1000;\n";}
 	var customer_3way_hangup_counter_trigger=0;
 	var customer_3way_hangup_dispo_message='';
 	var ivr_park_call='<?php echo $ivr_park_call ?>';
-	var qm_phone='<?php echo $QM_PHONE ?>';
+	var qm_phone='<?php echo isset($QM_PHONE) ? $QM_PHONE : '' ?>';
 	var APIManualDialQueue=0;
 	var APIManualDialQueue_last=0;
 	var api_manual_dial='<?php echo $api_manual_dial ?>';
@@ -1607,7 +1608,11 @@ function set_length(SLnumber,SLlength_goal,SLdirection)
 //                                                   clearInterval(MyCallTimer);
                                                 }
                                                 if(VLAStatuS == 'PAUSED' && CamPCalLs > 0){
-                                                   $('#InboundCallBoxModal').modal('show');
+                                                  if(inbound_call_popup == 'Y') {
+                                                    $('#InboundCallBoxModal').modal('show');
+                                                  } else {
+                                                    $('#InboundCallBoxModal').modal('hide');
+                                                  }
                                                 } else {
                                                   $('#InboundCallBoxModal').modal('hide');
                                                 }
@@ -4437,7 +4442,6 @@ $('#CallBackList-listings-dashboard').DataTable().clear().destroy();
 					}
 				if (active_group_alias.length > 1)
 					{var sending_group_alias = 1;}
-
 				ManualDialNext("",MDLeadIDform,MDDiaLCodEform,MDPhonENumbeRform,MDLookuPLeaD,MDVendorLeadCode,sending_group_alias,MDTypeform);
 				}
 
@@ -4489,7 +4493,6 @@ $('#CallBackList-listings-dashboard').DataTable().clear().destroy();
 				}
 			}
 		}
-
 
 // ################################################################################
 // Toggle the no-dial flag
@@ -5027,7 +5030,6 @@ $('#CallBackList-listings-dashboard').DataTable().clear().destroy();
 			}
 		}
 
-
 // ################################################################################
 // Send the Manual Dial Next Number request
 	function ManualDialNext(mdnCBid,mdnBDleadid,mdnDiaLCodE,mdnPhonENumbeR,mdnStagE,mdVendorid,mdgroupalias,mdtype,MDNclick)
@@ -5295,7 +5297,11 @@ $('#CallBackList-listings-dashboard').DataTable().clear().destroy();
 										}
 									}
 
+                  var string = MDnextResponse_array[8];
+                  var replaced= string.slice(0, 2) + string.slice(2).replace(/.(?=....)/g, '*');
+
 								document.vicidial_form.phone_number.value		= MDnextResponse_array[8];
+                document.vicidial_form.phone_number1.value		= replaced;
 								document.vicidial_form.title.value				= MDnextResponse_array[9];
 								document.vicidial_form.first_name.value			= MDnextResponse_array[10];
 								document.vicidial_form.middle_initial.value		= MDnextResponse_array[11];
@@ -13313,7 +13319,7 @@ function CallBackDatE_submit() {
 				{hideDiv('AgentStatusCalls');}
 			if (agentcallsstatus != '1')
 				{hideDiv('AgentStatusSpan');}
-			if ( ( (auto_dial_level > 0) && (dial_method != "INBOUND_MAN") ) || (manual_dial_preview < 1) )
+			if ( ( (auto_dial_level > 0) && (dial_method != "INBOUND_MAN" || dial_method != "MANUAL") ) || (manual_dial_preview < 1) )
 				{clearDiv('DiaLLeaDPrevieW');}
 			if (alt_phone_dialing != 1)
 				{clearDiv('DiaLDiaLAltPhonE');}
@@ -13385,7 +13391,7 @@ function CallBackDatE_submit() {
                                 $('#modal-inbound-groups').modal('hide');
 				MainPanelToFront();
 				var CloserSelecting = 0;
-				if (dial_method == "INBOUND_MAN")
+				if (dial_method == "INBOUND_MAN" || dial_method == "MANUAL")
 					{
 					dial_method = "MANUAL";
 					auto_dial_level=0;
@@ -13887,7 +13893,7 @@ function CallBackDatE_submit() {
 					else
 						{
 						manual_auto_hotkey = 0;
-						if ( (dial_method == "INBOUND_MAN") || (dial_method == "MANUAL") )
+						if ( (dial_method == "INBOUND_MAN") )
 							{ManualDialNext('','','','','','0');}
 						}
 					}

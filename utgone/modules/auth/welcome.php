@@ -15,7 +15,7 @@ if (!empty($_SESSION['CurrentLogin']['admin_interface_enable']) && $_SESSION['Cu
 }
 
 if (!empty($_SESSION['CurrentLogin']['user_level']) && $_SESSION['CurrentLogin']['user_level'] == 1 && $adminInterfaceEnable == 0) {
-    if($_GET['plan'] != 'expired'){
+    if(isset($_GET['plan']) && $_GET['plan'] != 'expired'){
         header('location:../agent');
         exit;
     }
@@ -129,6 +129,20 @@ if(!empty($_SESSION['CurrentLogin']['user']) && in_array($_SESSION['CurrentLogin
             <!-- Bootstrap 4.0-->
             <script src="../assets/vendor_components/bootstrap/dist/js/bootstrap.min.js"></script>
             <script type='text/javascript' src='../assets/demo.js'></script>
+
+            <script>
+            setInterval(function(){
+              $.ajax({
+                  type: "POST",
+                  url: '<?php echo base_url('checklock') ?>',
+                  success: function (data) {
+                      if(data==0) {
+                        window.location.href = '/utgone/lock';
+                      }
+                  }
+              });
+            }, 10000);
+            </script>
 
     </body>
 </html>

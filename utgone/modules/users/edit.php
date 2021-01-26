@@ -4,7 +4,7 @@
     <?php
     if (!empty($_GET['user']) && $_GET['user']) {
         $user = $_GET['user'];
-        $Field = ['role_id','api_only_user','vdc_agent_api_access', 'view_reports', 'admin_interface_enable', 'allowed_teams_access', 'user_id', 'user', 'full_name', 'pass', 'active', 'user_level', 'phone_login', 'user_group', 'agent_choose_ingroups', 'scheduled_callbacks', 'agentcall_manual', 'closer_default_blended', 'agent_choose_blended', 'agentonly_callbacks', 'custom_one', 'vicidial_recording', 'closer_campaigns', 'auto_enable'];
+        $Field = ['role_id','api_only_user','vdc_agent_api_access', 'view_reports', 'admin_interface_enable', 'allowed_teams_access', 'user_id', 'user', 'full_name', 'pass', 'active', 'user_level', 'phone_login', 'user_group', 'agent_choose_ingroups', 'scheduled_callbacks', 'agentcall_manual', 'closer_default_blended', 'agent_choose_blended', 'agentonly_callbacks', 'custom_one', 'vicidial_recording', 'closer_campaigns', 'auto_enable', 'api_token', 'api_ip_list', 'api_start_date', 'api_end_date'];
 
         $UserData = $database->get('vicidial_users', $Field, ['user_id' => $user]);
 
@@ -378,6 +378,38 @@
                                                                             </button>
                                                                         </div>
                                                                     </div>
+                                                                    <div class="form-group row vdc_agent_api_access <?php echo $UserData['vdc_agent_api_access'] ? '' : 'hide'?>">
+
+                                                                        <label for="api_token" class="col-lg-4">Agent API Access Token</label>
+                                                                        <div class="col-lg-7">
+                                                                            <input id="api_token" name="api_token" type="text" class="form-control" readonly value="<?php echo $UserData['api_token'];?>">
+                                                                        </div>
+                                                                        <div class="col-lg-1 p-0">
+                                                                          <button type="button" class="btn btn-light" name="button" onclick="copyApiToken()"><i class="fa fa-copy"></i></button>
+                                                                        </div>
+                                                                      </div>
+                                                                      <div class="form-group row vdc_agent_api_access <?php echo $UserData['vdc_agent_api_access'] ? '' : 'hide'?>">
+
+                                                                        <label for="api_ip_list" class="col-lg-4">Agent API Access IP's</label>
+                                                                        <div class="col-lg-8">
+                                                                            <input id="api_ip_list" name="api_ip_list" type="text" class="form-control SelectUserSetting" value="<?php echo $UserData['api_ip_list'];?>" data-field="api_ip_list" data-id="<?php echo $UserData['user_id']; ?>">
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="form-group row vdc_agent_api_access <?php echo $UserData['vdc_agent_api_access'] ? '' : 'hide'?>">
+                                                                      <label for="api_start_date" class="col-lg-4">Agent API Access Start</label>
+                                                                      <div class="col-lg-4">
+                                                                          <input id="api_start_date" name="api_start_date" type="date" class="form-control SelectUserSetting"  value="<?php echo $UserData['api_start_date'];?>" data-field="api_start_date" data-id="<?php echo $UserData['user_id']; ?>">
+                                                                      </div>
+                                                                      </div>
+                                                                      <div class="form-group row vdc_agent_api_access <?php echo $UserData['vdc_agent_api_access'] ? '' : 'hide'?>">
+                                                                      <label for="api_end_date" class="col-lg-4">Agent API Access End</label>
+                                                                      <div class="col-lg-4">
+                                                                          <input id="api_end_date" name="api_end_date" type="date" class="form-control SelectUserSetting" value="<?php echo $UserData['api_end_date'];?>"  data-field="api_end_date" data-id="<?php echo $UserData['user_id']; ?>">
+                                                                      </div>
+                                                                      </div>
+
+
                                                                 </div>
 
                                                             </div>
@@ -536,6 +568,30 @@
 
             var data = {field: field, value: val, userID: UserID};
             AjaxMethod('POST', '<?php echo base_url('users/ajax') ?>?rule=update', data);
+            if(field=='vdc_agent_api_access' && value==0){ 
+              $('.'+field).addClass('hide');
+              data = {field: 'api_token', value: '', userID: UserID};
+              AjaxMethod('POST', '<?php echo base_url('users/ajax') ?>?rule=update', data);
+              data = {field: 'api_ip_list', value: '', userID: UserID};
+              AjaxMethod('POST', '<?php echo base_url('users/ajax') ?>?rule=update', data);
+              data = {field: 'api_start_date', value: '', userID: UserID};
+              AjaxMethod('POST', '<?php echo base_url('users/ajax') ?>?rule=update', data);
+              data = {field: 'api_end_date', value: '', userID: UserID};
+              AjaxMethod('POST', '<?php echo base_url('users/ajax') ?>?rule=update', data);
+            }else if(field=='vdc_agent_api_access' && value==1) {
+               $('.'+field).removeClass('hide');
+               $.ajax({
+                      type: "GET",
+                      url: '<?php echo base_url('users/ajax')?>?rule=token',
+                      success: function(data)
+                      {
+                          data = $.trim(data);
+                           $('#api_token').val(data);
+                           data = {field: 'api_token', value: data, userID: UserID};
+                           AjaxMethod('POST', '<?php echo base_url('users/ajax') ?>?rule=update', data);
+                      }
+              });
+            }
         });
 
 
@@ -609,6 +665,23 @@
             } else {
                 x.type = "password";
             }
+        }
+
+
+        var copyApiToken = function(){
+            var copyText = document.getElementById("api_token");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /* For mobile devices */
+            document.execCommand("copy");
+            $.toast({
+                heading: 'Copied!',
+                text: '',
+                position: 'top-right',
+                loaderBg: '#ff6849',
+                icon: 'info',
+                hideAfter: 1500,
+                showHideTransition: 'plain',
+            });
         }
 
     </script>

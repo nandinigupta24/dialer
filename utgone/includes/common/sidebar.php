@@ -142,11 +142,31 @@
                 </li>
             <?php endif; ?>
             <?php if (checkRole('email', 'any')): ?>
-                <li class="treeview">
+                <!-- <li class="treeview">
                     <a href="#">
                         <i class="fa fa-envelope text-red2 fa-lg" title="Manage Email and Chat platform."></i>
                     </a>
                     <ul class="treeview-menu">
+
+                    </ul>
+                </li> -->
+            <?php endif; ?>
+            <?php if (checkRole('sms', 'any')): ?>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-comments text-red2 fa-lg" title="Manage SMS platform"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <?php if (checkRole('sms', 'view')): ?>
+                            <li><a href="<?php echo base_url('sms') ?>"><i class="fa fa-file-text"></i>SMS Templates</a></li>
+                            <li><a href="<?php echo base_url('sms/routines') ?>"><i class="fa fa-road"></i>SMS Routines</a></li>
+                            <li><a href="<?php echo base_url('sms/live_queue') ?>"><i class="fa fa-tasks"></i>SMS Live Queue</a></li>
+                            <li><a href="<?php echo base_url('sms/sent') ?>"><i class="fa fa-send-o"></i>SMS Sent</a></li>
+                            <li><a href="<?php echo base_url('sms/received') ?>"><i class="fa fa-get-pocket"></i>Received</a></li>
+                            <li><a href="<?php echo base_url('sms/accounts') ?>"><i class="fa fa-user-circle-o"></i>Accounts</a></li>
+                        <?php endif; ?>
+
+                        <?php if (checkRole('email', 'any')): ?>
                         <?php if (checkRole('email', 'view')): ?>
                             <!--<li><a href="<?php echo base_url('email/create') ?>"><i class=""></i>New Templates</a></li>-->
                         <?php endif; ?>
@@ -165,22 +185,6 @@
                         <?php if (checkRole('email', 'view')): ?>
                             <li><a href="<?php echo base_url('email/sent') ?>"><i class="fa fa-send-o"></i>Email Sent</a></li>
                         <?php endif; ?>
-                    </ul>
-                </li>
-            <?php endif; ?>
-            <?php if (checkRole('sms', 'any')): ?>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-comments text-red2 fa-lg" title="Manage SMS platform"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <?php if (checkRole('sms', 'view')): ?>
-                            <li><a href="<?php echo base_url('sms') ?>"><i class="fa fa-file-text"></i>SMS Templates</a></li>
-                            <li><a href="<?php echo base_url('sms/routines') ?>"><i class="fa fa-road"></i>SMS Routines</a></li>
-                            <li><a href="<?php echo base_url('sms/live_queue') ?>"><i class="fa fa-tasks"></i>SMS Live Queue</a></li>
-                            <li><a href="<?php echo base_url('sms/sent') ?>"><i class="fa fa-send-o"></i>SMS Sent</a></li>
-                            <li><a href="<?php echo base_url('sms/received') ?>"><i class="fa fa-get-pocket"></i>Received</a></li>
-                            <li><a href="<?php echo base_url('sms/accounts') ?>"><i class="fa fa-user-circle-o"></i>Accounts</a></li>
                         <?php endif; ?>
                     </ul>
                 </li>

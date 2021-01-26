@@ -1,4 +1,4 @@
-ListRemove<?php if(!checkRole('data', 'view')){ no_permission(); } else {?>
+<?php if(!checkRole('data', 'view')){ no_permission(); } else {?>
  <style>
     .range-slider {
         -webkit-appearance: none;

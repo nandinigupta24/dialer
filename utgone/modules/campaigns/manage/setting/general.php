@@ -50,7 +50,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label>Minimum Hopper Level</label>
             <select class="form-control manage-field-select"  data-name="hopper_level" data-id="<?php echo $CampaignDetail['campaign_id']; ?>" name="hopper_level" id="hopper_level">
                 <option value="">Select Option</option>
@@ -69,6 +69,6 @@
                 <option value="4000" <?php echo ($CampaignDetail['hopper_level'] == '4000') ? 'selected' : ''; ?>>4000</option>
                 <option value="5000" <?php echo ($CampaignDetail['hopper_level'] == '5000') ? 'selected' : ''; ?>>5000</option>
             </select>
-        </div>
+        </div> -->
     </div>
 </div>

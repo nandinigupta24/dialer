@@ -1428,7 +1428,8 @@ else
 			$row=mysqli_fetch_row($rslt);
 			$MMscriptid[$e] =$row[0];
 			$MMscriptname[$e] = urlencode($row[1]);
-			$MMscriptids = "$MMscriptids'$MMscriptid[$e]',";
+			//$MMscriptids = "$MMscriptids'$MMscriptid[$e]',";
+      $MMscriptids = "'$MMscriptid[$e]',";
       if(isset($MMscriptnames)) {
           $MMscriptnames = "$MMscriptnames'$MMscriptname[$e]',";
       } else {

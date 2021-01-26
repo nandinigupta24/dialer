@@ -172,7 +172,7 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-barcode"></i>
                             </div>
-                            <input type="time" class="form-control" name="email_time" step="1"/>
+                            <input type="time" class="form-control" name="email_time"/>
                         </div>
                         <!-- /.input group -->
                     </div>

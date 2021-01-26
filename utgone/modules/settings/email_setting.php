@@ -19,7 +19,7 @@ $data = $DBUTG->get('sendgrid_settings', '*');
             <div class="col-12">
                 <div class="panel panel-visible formtabs" id="AllFormsTab" style="min-height: 274px;">
                     <div class="panel-heading">
-                        <div class="panel-title"> <span class="fa fa-desktop"></span>System Settings</div>
+                        <div class="panel-title"> <span class="fa fa-desktop"></span>Email Settings</div>
 
                     </div>
                     <div class="panel-body pn">

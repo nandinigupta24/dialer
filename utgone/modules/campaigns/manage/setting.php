@@ -15,7 +15,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item"><a class="active nav-link" href="#2tabInfo" data-toggle="tab" data-pop="popover" title="Manage campaign general information" data-content="Manage campaign general information" data-original-title="General information"><i class="fa fa-info"></i></a></li>
                 <li class="nav-item"><a class="nav-link" href="#2tabQueStrategy" data-toggle="tab" data-pop="popover" title="Queue Settings i.e. queue order, queue size" data-content="Queue Settings i.e. queue order, queue size." data-original-title="Queue Settings"><i class="fa fa-list-ol"></i></a></li>
-                <li class="nav-item"><a class="nav-link" href="#2tabCallStrategy" data-toggle="tab" data-pop="popover" title="Call Staregy i.e. Call method,call timeout,drop timeout" data-content="Call Staregy i.e. Call method,call timeout,drop timeout." data-original-title="Call Staregy"><i class="fa fa-phone"></i></a></li>
+                <li class="nav-item"><a class="nav-link" href="#2tabCallStrategy" data-toggle="tab" data-pop="popover" title="Call Strategy i.e. Call method,call timeout,drop timeout" data-content="Call Staregy i.e. Call method,call timeout,drop timeout." data-original-title="Call Staregy"><i class="fa fa-phone"></i></a></li>
                 <li class="nav-item"><a class="nav-link" href="#2tabWebFormSetting" data-toggle="tab" data-pop="popover" title="Web Form Settings i.e. web form selection, web form type." data-content="Web Form Settings i.e. web form selection, web form type." data-original-title="Web Form Settings"><i class="fa fa-code-fork"></i></a></li>
                 <li class="nav-item"><a class="nav-link" href="#2tabScriptSetting" data-toggle="tab" data-pop="popover" title="Script Settings i.e. script selection,script launch." data-content="Script Settings i.e. script selection,script launch." data-original-title="Script Settings"><i class="fa fa-code"></i></a></li>
                 <li class="nav-item"><a class="nav-link" href="#2tabOutboundSetting" data-toggle="tab" data-pop="popover" title="Outbound Settings i.e. outbound cid,dial prefixes." data-content="Outbound Settings i.e. outbound cid,dial prefixes." data-original-title="Outbound Settings"><i class="fa fa-arrow-up"></i></a></li>
@@ -83,7 +83,7 @@
             </div>
             </div>
         </div>
-        
+
     </div>
 </div>
 

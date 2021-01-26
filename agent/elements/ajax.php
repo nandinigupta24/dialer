@@ -21,8 +21,6 @@ if (!empty($_POST['rule']) && $_POST['rule']) {
         require 'include/call_history.php';
         exit;
     } elseif($_POST['rule'] == 'CallInbound'){
-      $CampaignID = $_POST['CampaignID'];
-      $InboundGroups = $_POST['InboundGroups'];
       $UserID = $_POST['UserID'];
       //$data = $database->query("SELECT * FROM vicidial_closer_log VCL JOIN vicidial_list VL ON VCL.lead_id = VL.lead_id  where VCL.call_date >= '" . date("Y-m-d") . " 00:00:00' AND VCL.call_date <= '" . date('Y-m-d') . " 23:59:59' AND VCL.user = '" . $UserID . "' AND VCL.status = 'DROP' AND VL.status = 'DROP' ORDER BY VCL.call_date DESC")->fetchAll(PDO::FETCH_ASSOC);
       //$data = $database->query("SELECT * FROM vicidial_closer_log VCL where VCL.call_date >= '" . date("Y-m-d") . " 00:00:00' AND VCL.call_date <= '" . date('Y-m-d') . " 23:59:59' AND VCL.user = '" . $UserID . "' AND VCL.status = 'DROP'GROUP BY VCL.phone_number ORDER BY VCL.call_date DESC")->fetchAll(PDO::FETCH_ASSOC);

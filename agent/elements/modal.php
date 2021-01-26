@@ -30,7 +30,7 @@ echo $zi ?>;display:none;" id="Header">
                 echo "&nbsp; " . _QXZ("to campaign") . ": $VD_campaign&nbsp; ";
                 ?> &nbsp; &nbsp; <span id="agentchannelSPAN"></span></font></td>
             <td colspan="3" valign="top" align="right"><font class="body_text">
-                <?php if ($territoryCT > 0) {
+                <?php if (isset($territoryCT) && $territoryCT > 0) {
                     echo "<a href=\"#\" onclick=\"OpeNTerritorYSelectioN();return false;\">" . _QXZ("TERRITORIES") . "</a> &nbsp; &nbsp; \n";
                 } ?>
 <?php if ($INgrpCT > 0) {

@@ -336,5 +336,60 @@
                 </div>
             </div>
         </div>
+
+        <div class="form-group">
+            <div class="row">
+                <label class="col-md-12" for="campaign_inbound_call_drop">Inbound Call Drop</label>
+                <div class="col-md-12">
+                  <button type="button" class="btn btn-sm btn-toggle manage-field-switch <?php echo ($CampaignDetail['inbound_call_drop'] == 'Y') ? 'active' : ''; ?>"  data-name="inbound_call_drop" data-id="<?php echo $CampaignDetail['campaign_id']; ?>" data-val="<?php echo $CampaignDetail['inbound_call_drop']; ?>" id="" data-toggle="button" aria-pressed="true" autocomplete="off">
+                      <div class="handle"></div>
+                  </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <label class="col-md-12" for="campaign_inbound_call_popup">Hide Inbound Call Pop Up</label>
+                <div class="col-md-12">
+                  <button type="button" class="btn btn-sm btn-toggle manage-field-switch <?php echo ($CampaignDetail['inbound_call_popup'] == 'Y') ? 'active' : ''; ?>"  data-name="inbound_call_popup" data-id="<?php echo $CampaignDetail['campaign_id']; ?>" data-val="<?php echo $CampaignDetail['inbound_call_popup']; ?>" id="" data-toggle="button" aria-pressed="true" autocomplete="off">
+                      <div class="handle"></div>
+                  </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <label class="col-md-12" for="campaign_hide_phone">Hide Phone Number</label>
+                <div class="col-md-12">
+                  <button type="button" class="btn btn-sm btn-toggle manage-field-switch <?php echo ($CampaignDetail['hide_phone'] == 'Y') ? 'active' : ''; ?>"  data-name="hide_phone" data-id="<?php echo $CampaignDetail['campaign_id']; ?>" data-val="<?php echo $CampaignDetail['hide_phone']; ?>" id="" data-toggle="button" aria-pressed="true" autocomplete="off">
+                      <div class="handle"></div>
+                  </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <label class="col-md-12" for="campaign_hide_survey">Hide Survey</label>
+                <div class="col-md-12">
+                  <button type="button" class="btn btn-sm btn-toggle manage-field-switch <?php echo ($CampaignDetail['hide_survey'] == 'Y') ? 'active' : ''; ?>"  data-name="hide_survey" data-id="<?php echo $CampaignDetail['campaign_id']; ?>" data-val="<?php echo $CampaignDetail['hide_survey']; ?>" id="" data-toggle="button" aria-pressed="true" autocomplete="off">
+                      <div class="handle"></div>
+                  </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <label class="col-md-12" for="campaign_areacode">Areacode</label>
+                <div class="col-md-12">
+                  <button type="button" class="btn btn-sm btn-toggle manage-field-switch <?php echo ($CampaignDetail['areacode'] == 'Y') ? 'active' : ''; ?>"  data-name="areacode" data-id="<?php echo $CampaignDetail['campaign_id']; ?>" data-val="<?php echo $CampaignDetail['areacode']; ?>" id="" data-toggle="button" aria-pressed="true" autocomplete="off">
+                      <div class="handle"></div>
+                  </button>
+                </div>
+            </div>
+        </div>
     </div><!--body-->
 </div>

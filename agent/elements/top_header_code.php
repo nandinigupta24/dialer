@@ -587,7 +587,7 @@ if ($CAMPactive > 0) {
     $HKstatusnames = isset($HKstatusnames) ? substr("$HKstatusnames", 0, -1): '';
 
     ##### grab the campaign settings
-    $stmt = "SELECT park_ext,park_file_name,web_form_address,allow_closers,auto_dial_level,dial_timeout,dial_prefix,campaign_cid,campaign_vdad_exten,campaign_rec_exten,campaign_recording,campaign_rec_filename,campaign_script,get_call_launch,am_message_exten,xferconf_a_dtmf,xferconf_a_number,xferconf_b_dtmf,xferconf_b_number,alt_number_dialing,scheduled_callbacks,wrapup_seconds,wrapup_message,closer_campaigns,use_internal_dnc,allcalls_delay,omit_phone_code,agent_pause_codes_active,no_hopper_leads_logins,campaign_allow_inbound,manual_dial_list_id,default_xfer_group,xfer_groups,disable_alter_custphone,display_queue_count,manual_dial_filter,agent_clipboard_copy,use_campaign_dnc,three_way_call_cid,dial_method,three_way_dial_prefix,web_form_target,vtiger_screen_login,agent_allow_group_alias,default_group_alias,quick_transfer_button,prepopulate_transfer_preset,view_calls_in_queue,view_calls_in_queue_launch,call_requeue_button,pause_after_each_call,no_hopper_dialing,agent_dial_owner_only,agent_display_dialable_leads,web_form_address_two,agent_select_territories,crm_popup_login,crm_login_address,timer_action,timer_action_message,timer_action_seconds,start_call_url,dispo_call_url,xferconf_c_number,xferconf_d_number,xferconf_e_number,use_custom_cid,scheduled_callbacks_alert,scheduled_callbacks_count,manual_dial_override,blind_monitor_warning,blind_monitor_message,blind_monitor_filename,timer_action_destination,enable_xfer_presets,hide_xfer_number_to_dial,manual_dial_prefix,customer_3way_hangup_logging,customer_3way_hangup_seconds,customer_3way_hangup_action,ivr_park_call,manual_preview_dial,api_manual_dial,manual_dial_call_time_check,my_callback_option,per_call_notes,agent_lead_search,agent_lead_search_method,queuemetrics_phone_environment,auto_pause_precall,auto_pause_precall_code,auto_resume_precall,manual_dial_cid,custom_3way_button_transfer,callback_days_limit,disable_dispo_screen,disable_dispo_status,screen_labels,status_display_fields,pllb_grouping,pllb_grouping_limit,in_group_dial,in_group_dial_select,pause_after_next_call,owner_populate,manual_dial_lead_id,dead_max,dispo_max,pause_max,dead_max_dispo,dispo_max_dispo,max_inbound_calls,manual_dial_search_checkbox,hide_call_log_info,timer_alt_seconds,wrapup_bypass,wrapup_after_hotkey,callback_active_limit,callback_active_limit_override,comments_all_tabs,comments_dispo_screen,comments_callback_screen,qc_comment_history,show_previous_callback,clear_script,manual_dial_search_filter,web_form_address_three,manual_dial_override_field,status_display_ingroup,customer_gone_seconds,agent_display_fields,manual_dial_timeout,manual_auto_next,manual_auto_show,allow_required_fields,hide_agent_call_logs,hide_customer_call_history,DTMF_keypad,tags,call_timer,campaign_name FROM vicidial_campaigns where campaign_id = '$VD_campaign';";
+    $stmt = "SELECT park_ext,park_file_name,web_form_address,allow_closers,auto_dial_level,dial_timeout,dial_prefix,campaign_cid,campaign_vdad_exten,campaign_rec_exten,campaign_recording,campaign_rec_filename,campaign_script,get_call_launch,am_message_exten,xferconf_a_dtmf,xferconf_a_number,xferconf_b_dtmf,xferconf_b_number,alt_number_dialing,scheduled_callbacks,wrapup_seconds,wrapup_message,closer_campaigns,use_internal_dnc,allcalls_delay,omit_phone_code,agent_pause_codes_active,no_hopper_leads_logins,campaign_allow_inbound,manual_dial_list_id,default_xfer_group,xfer_groups,disable_alter_custphone,display_queue_count,manual_dial_filter,agent_clipboard_copy,use_campaign_dnc,three_way_call_cid,dial_method,three_way_dial_prefix,web_form_target,vtiger_screen_login,agent_allow_group_alias,default_group_alias,quick_transfer_button,prepopulate_transfer_preset,view_calls_in_queue,view_calls_in_queue_launch,call_requeue_button,pause_after_each_call,no_hopper_dialing,agent_dial_owner_only,agent_display_dialable_leads,web_form_address_two,agent_select_territories,crm_popup_login,crm_login_address,timer_action,timer_action_message,timer_action_seconds,start_call_url,dispo_call_url,xferconf_c_number,xferconf_d_number,xferconf_e_number,use_custom_cid,scheduled_callbacks_alert,scheduled_callbacks_count,manual_dial_override,blind_monitor_warning,blind_monitor_message,blind_monitor_filename,timer_action_destination,enable_xfer_presets,hide_xfer_number_to_dial,manual_dial_prefix,customer_3way_hangup_logging,customer_3way_hangup_seconds,customer_3way_hangup_action,ivr_park_call,manual_preview_dial,api_manual_dial,manual_dial_call_time_check,my_callback_option,per_call_notes,agent_lead_search,agent_lead_search_method,queuemetrics_phone_environment,auto_pause_precall,auto_pause_precall_code,auto_resume_precall,manual_dial_cid,custom_3way_button_transfer,callback_days_limit,disable_dispo_screen,disable_dispo_status,screen_labels,status_display_fields,pllb_grouping,pllb_grouping_limit,in_group_dial,in_group_dial_select,pause_after_next_call,owner_populate,manual_dial_lead_id,dead_max,dispo_max,pause_max,dead_max_dispo,dispo_max_dispo,max_inbound_calls,manual_dial_search_checkbox,hide_call_log_info,timer_alt_seconds,wrapup_bypass,wrapup_after_hotkey,callback_active_limit,callback_active_limit_override,comments_all_tabs,comments_dispo_screen,comments_callback_screen,qc_comment_history,show_previous_callback,clear_script,manual_dial_search_filter,web_form_address_three,manual_dial_override_field,status_display_ingroup,customer_gone_seconds,agent_display_fields,manual_dial_timeout,manual_auto_next,manual_auto_show,allow_required_fields,hide_agent_call_logs,hide_customer_call_history,DTMF_keypad,tags,call_timer,campaign_name,inbound_call_drop,hide_phone,inbound_call_popup FROM vicidial_campaigns where campaign_id = '$VD_campaign';";
     $rslt = mysql_to_mysqli($stmt, $link);
     if ($mel > 0) {
         mysql_error_logging($NOW_TIME, $link, $mel, $stmt, '01013', $VD_login, $server_ip, $session_name, $one_mysql_log);
@@ -737,6 +737,9 @@ if ($CAMPactive > 0) {
     $call_tags = $row[138];
     $call_timer = $row[139];
     $campaign_name = $row[140];
+    $inbound_call_drop = $row[141];
+    $hide_phone = $row[142];
+    $inbound_call_popup = $row[143];
 
     if (($SSmanual_auto_next < 1) or ( ($dial_method != 'INBOUND_MAN') and ( $dial_method != 'MANUAL') )) {
         $manual_auto_next = 0;
@@ -1112,18 +1115,18 @@ if ($CAMPactive > 0) {
 						$row=mysqli_fetch_row($rslt);
 						$pause_codes[$i] =			$row[0];
 						$pause_code_names[$i] =		$row[1];
-						$pause_code_mgrapr[$i] =	$row[2];
+						// $pause_code_mgrapr[$i] =	$row[2];
 						$VARpause_codes = "$VARpause_codes'$pause_codes[$i]',";
 						$VARpause_code_names = "$VARpause_code_names'$pause_code_names[$i]',";
-						$VARpause_code_mgrapr = "$VARpause_code_mgrapr'$pause_code_mgrapr[$i]',";
-						if ($pause_code_mgrapr[$i] == 'YES') {$mgrapr_ct++;}
+						//$VARpause_code_mgrapr = "$VARpause_code_mgrapr'$pause_code_mgrapr[$i]',";
+						// if ($pause_code_mgrapr[$i] == 'YES') {$mgrapr_ct++;}
 						$i++;
 						$j++;
 						}
-					$VD_pause_codes_ct = ($VD_pause_codes_ct+$VD_pause_codes);
+					//$VD_pause_codes_ct = isset($VD_pause_codes_ct) ? ($VD_pause_codes_ct+$VD_pause_codes) : $VD_pause_codes;
 					$VARpause_codes = substr("$VARpause_codes", 0, -1);
 					$VARpause_code_names = substr("$VARpause_code_names", 0, -1);
-					$VARpause_code_mgrapr = substr("$VARpause_code_mgrapr", 0, -1);
+					//$VARpause_code_mgrapr = substr("$VARpause_code_mgrapr", 0, -1);
     }
 
     ##### grab the inbound groups to choose from if campaign contains CLOSER
@@ -1312,7 +1315,7 @@ if ($CAMPactive > 0) {
             $XFgrpCT++;
         }
         $VARxfergroups = substr("$VARxfergroups", 0, -1);
-        $VARxfergroupsnames = substr("$VARxfergroupsnames", 0, -1);
+        $VARxfergroupsnames = isset($VARxfergroupsnames) ? substr("$VARxfergroupsnames", 0, -1) : '';
     }
 
     if (preg_match('/Y/', $agent_allow_group_alias)) {

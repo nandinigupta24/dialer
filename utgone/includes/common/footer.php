@@ -58,6 +58,18 @@ setInterval(function(){
   });
 }, 10000);
 
+$('.lock_screen').click(function() {
+  $.ajax({
+      type: "POST",
+      url: '<?php echo base_url('lock_data') ?>',
+      success: function (data) {
+          if(data==1) {
+            window.location.href = '/utgone/lock';
+          }
+      }
+  });
+});
+
 </script>
 
 <?php

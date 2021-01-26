@@ -17,13 +17,26 @@ if($pathUrl[0]=='checklock') {
     echo 0; die;
   }
 }
-if(!isset($_SESSION['Login']['user']) && $pathUrl[0]!='login') {
+
+if($pathUrl[0]=='lock_data') {
+  if(isset($_SESSION['CurrentLogin']['Lock'])) {
+    $_SESSION['CurrentLogin']['revertUrl'] = $_SERVER['HTTP_REFERER'];
+    unset($_SESSION['CurrentLogin']['Lock']);
+    echo 1; die;
+  } else {
+    echo 0; die;
+  }
+}
+
+
+if(!isset($_SESSION['Login']['user']) && $pathUrl[0]!='login' && !isset($_SESSION['CurrentLogin']['Lock'])) {
     redirect('login');
 }
 
-/* if(!isset($_SESSION['CurrentLogin']['Lock']) && isset($_SESSION['Login']['user']) && $pathUrl[0]!='lock') {
+if(!isset($_SESSION['CurrentLogin']['Lock']) && isset($_SESSION['Login']['user']) && $pathUrl[0]!='lock' && $pathUrl[0]!='logout') {
     redirect('lock');
-} */
+}
+
 
 if(isset($_SESSION['Login']['user']) && $_SESSION['Login']['user']) {
     include('includes/variables.php');
@@ -56,7 +69,7 @@ if(isset($pathUrl[0]) && $pathUrl[0]) {
             redirect('login');
         }
         if($module=='lock') {
-            unset($_SESSION['CurrentLogin']['Lock']);
+          unset($_SESSION['CurrentLogin']['Lock']);
             //redirect('lock');
         }
         $module = 'auth';
