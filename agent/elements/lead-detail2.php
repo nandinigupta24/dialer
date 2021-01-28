@@ -176,7 +176,13 @@
                     ?>
                     <div class="form-group">
                         <label for="phone_number">Phone Number:</label>
+                        <?php if($hide_phone == 'Y') { ?>
+                          <input type="hidden" class="form-control cust_form" placeholder="<?php echo $label_phone_number; ?>" size="20" name="phone_number" id="phone_number" maxlength="<?php echo $MAXphone_number; ?>" value=""/>
+                          <input type="text" class="form-control cust_form" placeholder="<?php echo $label_phone_number; ?>" size="20" name="phone_number1" id="phone_number1" maxlength="<?php echo $MAXphone_number; ?>" value=""/>
+                        <?php } else { ?>
+                        <input type="hidden" class="form-control cust_form" placeholder="<?php echo $label_phone_number; ?>" size="20" name="phone_number1" id="phone_number1" maxlength="<?php echo $MAXphone_number; ?>" value=""/>
                         <input type="text" class="form-control cust_form" placeholder="<?php echo $label_phone_number; ?>" size="20" name="phone_number" id="phone_number" maxlength="<?php echo $MAXphone_number; ?>" value=""/>
+                      <?php } ?>
                     </div>
                     <?php
 //    }
@@ -323,7 +329,7 @@
                 <div class="col-6">
                     <div class="form-group">
                         <label for="datepicker">Date:</label>
-                        <input type="text" class="form-control pull-right" id="datepicker">
+                        <input type="text" autocomplete="off" class="form-control pull-right" id="datepicker">
                     </div>
                     <!-- /.input group -->
                 </div>

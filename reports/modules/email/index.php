@@ -13,7 +13,7 @@
         <div class="panel">
             <div class="panel-heading">
                 <span class="panel-title"><i class="fa fa-envelope"></i> Auto Email Report</span>
-                
+
                 <ul class="nav panel-tabs">
                                     <li> <a href="javascript:void(0);" title="Create Report" data-toggle="modal" data-target="#modal-report" data-backdrop="static" data-keyboard="false"><i class="fa fa-plus" style="margin-top:4px;"></i></a></li>
                 </ul>
@@ -166,16 +166,13 @@
                         </div>
                         <!-- /.input group -->
                     </div>
-                    <div class="form-group WeeklyDay" style="display:none;">
-                        <label>Week Day Selection:</label>
+                    <div class="form-group">
+                        <label>Time:</label>
                         <div class="input-group">
                             <div class="input-group-addon">
                                 <i class="fa fa-barcode"></i>
                             </div>
-                            <select class="form-control" name="week_day">
-                                <option value="friday">Friday</option>
-                                <option value="saturday">Saturday</option>
-                            </select>
+                            <input type="time" class="form-control" name="email_time"/>
                         </div>
                         <!-- /.input group -->
                     </div>

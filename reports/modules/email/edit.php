@@ -110,6 +110,16 @@
             <!-- /.input group -->
         </div>
         <div class="form-group">
+            <label>Time:</label>
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <i class="fa fa-barcode"></i>
+                </div>
+                <input type="time" class="form-control" name="email_time" value="<?php echo $data['email_time']; ?>"/>
+            </div>
+            <!-- /.input group -->
+        </div>
+        <div class="form-group">
             <label>Recipients:</label>
             <div class="input-group">
                 <div class="input-group-addon">

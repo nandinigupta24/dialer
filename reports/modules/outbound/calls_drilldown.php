@@ -80,14 +80,14 @@ $('#table-list-campaigns').DataTable();
                     'This Month': [moment().startOf('month'), moment().endOf('month')],
                     'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
                 },
-                startDate: moment().subtract(29, 'days'),
+                startDate: moment(),
                 endDate: moment()
             },
             function (start, end) {
                 $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
                 var start = start.format('YYYY-MM-DD');
                 var end = end.format('YYYY-MM-DD');
-               
+
                 window.location.href = '<?php echo base_url('outbound/calls_drilldown') ?>?AgentID=<?php echo $_GET['AgentID'];?>&start='+start+'&end='+end;
 //                var dt = $('#table-list-campaigns').DataTable({
 //                    dom: 'Bfrtip',

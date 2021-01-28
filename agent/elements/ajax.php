@@ -21,8 +21,6 @@ if (!empty($_POST['rule']) && $_POST['rule']) {
         require 'include/call_history.php';
         exit;
     } elseif($_POST['rule'] == 'CallInbound'){
-      $CampaignID = $_POST['CampaignID'];
-      $InboundGroups = $_POST['InboundGroups'];
       $UserID = $_POST['UserID'];
       //$data = $database->query("SELECT * FROM vicidial_closer_log VCL JOIN vicidial_list VL ON VCL.lead_id = VL.lead_id  where VCL.call_date >= '" . date("Y-m-d") . " 00:00:00' AND VCL.call_date <= '" . date('Y-m-d') . " 23:59:59' AND VCL.user = '" . $UserID . "' AND VCL.status = 'DROP' AND VL.status = 'DROP' ORDER BY VCL.call_date DESC")->fetchAll(PDO::FETCH_ASSOC);
       //$data = $database->query("SELECT * FROM vicidial_closer_log VCL where VCL.call_date >= '" . date("Y-m-d") . " 00:00:00' AND VCL.call_date <= '" . date('Y-m-d') . " 23:59:59' AND VCL.user = '" . $UserID . "' AND VCL.status = 'DROP'GROUP BY VCL.phone_number ORDER BY VCL.call_date DESC")->fetchAll(PDO::FETCH_ASSOC);
@@ -90,7 +88,7 @@ if (!empty($_POST['rule']) && $_POST['rule']) {
 
         switch($caseValue){
             case 'Call':
-                $data = $database->query("SELECT AL.event_time,AL.lead_id,L.first_name,L.last_name,AL.status,AL.talk_sec
+                $data = $database->query("SELECT AL.event_time,AL.lead_id,L.first_name,L.last_name,L.phone_number,AL.status,AL.talk_sec
 FROM asterisk.vicidial_agent_log AL
 join asterisk.vicidial_list L
 on AL.lead_id = L.lead_id
@@ -100,7 +98,7 @@ and AL.user = '".$LoginUser."' AND event_time BETWEEN '".date('Y-m-d')." 00:00:0
                 require 'include/call_detail.php';
                 break;
             case 'Connect':
-                $data = $database->query("SELECT AL.event_time,AL.lead_id,L.first_name,L.last_name,AL.status,AL.talk_sec
+                $data = $database->query("SELECT AL.event_time,AL.lead_id,L.first_name,L.last_name,L.phone_number,AL.status,AL.talk_sec
 FROM asterisk.vicidial_agent_log AL
 join asterisk.vicidial_list L
 on AL.lead_id = L.lead_id
@@ -109,7 +107,7 @@ and AL.user = '".$LoginUser."' AND AL.event_time BETWEEN '".date('Y-m-d')." 00:0
                 require 'include/call_detail.php';
                 break;
             case 'DMC':
-                $data = $database->query("SELECT AL.event_time,AL.lead_id,L.first_name,L.last_name,AL.status,AL.talk_sec
+                $data = $database->query("SELECT AL.event_time,AL.lead_id,L.first_name,L.last_name,L.phone_number,AL.status,AL.talk_sec
 FROM asterisk.vicidial_agent_log AL
 join asterisk.vicidial_list L
 on AL.lead_id = L.lead_id
@@ -118,7 +116,7 @@ and AL.user = '".$LoginUser."' AND AL.event_time BETWEEN '".date('Y-m-d')." 00:0
                 require 'include/call_detail.php';
                 break;
             case 'Sale':
-               $data = $database->query("SELECT AL.event_time,AL.lead_id,L.first_name,L.last_name,AL.status,AL.talk_sec
+               $data = $database->query("SELECT AL.event_time,AL.lead_id,L.first_name,L.last_name,L.phone_number,AL.status,AL.talk_sec
 FROM asterisk.vicidial_agent_log AL
 join asterisk.vicidial_list L
 on AL.lead_id = L.lead_id
@@ -133,12 +131,12 @@ join asterisk.vicidial_list L
 on AL.lead_id = L.lead_id
 where AL.campaign_id = '".$LoginCampaign."'
 and AL.user = '".$LoginUser."' AND AL.event_time BETWEEN '".date('Y-m-d')." 00:00:00' AND '".date('Y-m-d')." 23:59:59' AND AL.status is NOT NULL")->fetchAll(); */
-                $data1 = $database->query("SELECT *, L.first_name, L.last_name, L.email FROM asterisk.vicidial_log VCL
+                $data1 = $database->query("SELECT *, L.first_name, L.last_name, L.phone_number, L.email FROM asterisk.vicidial_log VCL
                 join asterisk.vicidial_list L on VCL.lead_id = L.lead_id where VCL.call_date >= '" . date('Y-m-d') . " 00:00:00'
                 AND VCL.call_date <= '" . date("Y-m-d") . " 23:59:59' AND VCL.user = '" . $LoginUser . "'
                 AND VCL.campaign_id IN ('" . implode("','", $CampaignIDs) . "') ORDER BY VCL.call_date DESC")->fetchAll();
 
-                $data2 = $database->query("SELECT *, L.first_name, L.last_name, L.email FROM asterisk.vicidial_closer_log VCL
+                $data2 = $database->query("SELECT *, L.first_name, L.last_name, L.phone_number, L.email FROM asterisk.vicidial_closer_log VCL
                 join asterisk.vicidial_list L on VCL.lead_id = L.lead_id where VCL.call_date >= '" . date('Y-m-d') . " 00:00:00'
                 AND VCL.call_date <= '" . date("Y-m-d") . " 23:59:59' AND VCL.user = '" . $LoginUser . "'
                 AND VCL.campaign_id IN ('" . implode("','", $CampaignIDs) . "') ORDER BY VCL.call_date DESC")->fetchAll();
@@ -153,7 +151,7 @@ and AL.user = '".$LoginUser."' AND AL.event_time BETWEEN '".date('Y-m-d')." 00:0
                 require 'include/wait_detail.php';
                 break;
             case 'Dispo':
-               $data = $database->query("SELECT AL.event_time,AL.lead_id,L.first_name,L.last_name,AL.status,AL.dispo_sec as talk_sec
+               $data = $database->query("SELECT AL.event_time as call_date,AL.lead_id,L.first_name,L.last_name,L.phone_number,AL.status,AL.dispo_sec as length_in_sec
 FROM asterisk.vicidial_agent_log AL
 join asterisk.vicidial_list L
 on AL.lead_id = L.lead_id

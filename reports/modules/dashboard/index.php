@@ -1,6 +1,6 @@
 <div class="content-wrapper">
     <?php
- 
+
 $stmt="SELECT user_id,user,pass,full_name,user_level from vicidial_users where user='$PHP_AUTH_USER';";
 $rslt=mysql_to_mysqli($stmt, $link);
 $row=mysqli_fetch_row($rslt);
@@ -75,7 +75,7 @@ $stmt="SELECT closer_campaigns from vicidial_campaigns;";
 
 		$stmt="SELECT extension,user,conf_exten,status,server_ip,UNIX_TIMESTAMP(last_call_time),UNIX_TIMESTAMP(last_call_finish),call_server_ip,campaign_id from vicidial_live_agents WHERE campaign_id IN ('".implode("','",$_SESSION['CurrentLogin']['CampaignID'])."')";
 //		$stmt="SELECT extension,user,conf_exten,status,server_ip,UNIX_TIMESTAMP(last_call_time),UNIX_TIMESTAMP(last_call_finish),call_server_ip,campaign_id from vicidial_live_agents";
-		
+
                 $rslt=mysql_to_mysqli($stmt, $link);
 		$agent_incall=0; $agent_total=0;
 		while($row=mysqli_fetch_array($rslt))
@@ -227,14 +227,18 @@ $stmt="SELECT closer_campaigns from vicidial_campaigns;";
                     </div>
                     <div class="box-body">
                         <?php
-                        
+
                         $MenuList = ['Campaign'=>'vicidial_campaigns','List'=>'vicidial_lists','User'=>'vicidial_users'];
-                        
+
                         $MenuConditionList = [];
                         $MenuConditionList['Campaign'] = " WHERE campaign_id IN ('".implode("','",$_SESSION['CurrentLogin']['Campaign'])."')";
                         $MenuConditionList['List'] = " WHERE campaign_id IN ('".implode("','",$_SESSION['CurrentLogin']['Campaign'])."')";
-                        $MenuConditionList['User'] = " WHERE user_group = '".$_SESSION['CurrentLogin']['user_group']."'";
-                        
+                        if(!empty($_SESSION['CurrentLogin']['user_group']) && $_SESSION['CurrentLogin']['user_group'] == 'ADMIN'){
+                            $MenuConditionList['User'] = " ";
+                        }else{
+                            $MenuConditionList['User'] = " WHERE user_group IN ('".implode("','",$_SESSION['CurrentLogin']['allowed_teams_access'])."')";
+                        }
+
                         ?>
                         <table class="table table-bordered">
                             <thead class="bg-info">
@@ -242,15 +246,15 @@ $stmt="SELECT closer_campaigns from vicidial_campaigns;";
                                     <th>Menu</th>
                                     <th>Active</th>
                                     <th>Inactive</th>
-                                    <th>Total</th> 
+                                    <th>Total</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php foreach($MenuList as $key=>$listMenu){
-                                    $query = "SELECT 
+                                    $query = "SELECT
   COUNT(CASE WHEN active='Y' THEN 1 ELSE NULL END) as 'Active',
   COUNT(CASE WHEN active='N' THEN 1 ELSE NULL END) as 'Inactive',
-  COUNT(*) as total 
+  COUNT(*) as total
 FROM ".$listMenu.$MenuConditionList[$key];
                         $data = $database->query($query)->fetchAll(PDO::FETCH_ASSOC);
                                     ?>
@@ -266,15 +270,30 @@ FROM ".$listMenu.$MenuConditionList[$key];
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-12 col-lg-6">
           <!-- AREA CHART -->
           <div class="box">
             <div class="box-header with-border">
-              <h4 class="box-title">Inbound Groups (CogentPSP & CogentBureau1)</h4>
+              <?php
+              $myArray = array();
+              if($_SESSION['CurrentLogin']['user_group'] != 'ADMIN'){
+                  $Inbound_Groups = $database->select('vicidial_inbound_groups', ['group_id', 'group_name', 'group_color', 'active','user_group','group_handling'],['user_group'=>$_SESSION['CurrentLogin']['allowed_teams_access']]);
+              }else{
+                   $Inbound_Groups = $database->select('vicidial_inbound_groups', ['group_id', 'group_name', 'group_color', 'active','user_group','group_handling']);
+              }
+              $group_name = array_column($Inbound_Groups,'group_name');
+
+              foreach($Inbound_Groups as $value){
+                $myArray[] = $value['group_name'];
+              }
+              ?>
+              <h4 class="box-title">Inbound Groups
+                (<?php echo implode( ', ', $myArray ); ?>)
+              </h4>
 				<ul class="box-controls pull-right">
                   <li><a class="box-btn-close" href="#"></a></li>
-                  <li><a class="box-btn-slide" href="#"></a></li>	
+                  <li><a class="box-btn-slide" href="#"></a></li>
                   <li><a class="box-btn-fullscreen" href="#"></a></li>
                 </ul>
             </div>
@@ -285,19 +304,19 @@ FROM ".$listMenu.$MenuConditionList[$key];
             </div>
             <!-- /.box-body -->
           </div>
-          <!-- /.box -->			
-        </div>	
-           
+          <!-- /.box -->
+        </div>
+
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-header">
                         <h4 class="box-title">Server Report</h4>
                     </div>
                     <div class="box-body">
-                        <?php 
+                        <?php
                         $data = $database->query("SELECT server_id,server_description,server_ip,active,sysload,channels_total,cpu_idle_percent,disk_usage,active_agent_login_server,active_asterisk_server,svn_revision from servers order by server_id")->fetchAll(PDO::FETCH_ASSOC);
                         $web_u_time = date('U');
-                        
+
                         ?>
                         <table class="table table-bordered">
                             <thead class="bg-brown">
@@ -315,7 +334,7 @@ FROM ".$listMenu.$MenuConditionList[$key];
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
+                                <?php
                                 $count = 0;
                                 foreach($data as $server){
                                     $UTIme = $web_u_time;
@@ -335,24 +354,24 @@ FROM ".$listMenu.$MenuConditionList[$key];
                                             $k++;
                                             }
                                     $disk = "$disk%";
-                                
+
                                     $Agent = $database->count('vicidial_live_agents',['server_ip'=>$server['server_ip']]);
                                     $class = 'bg-pale-cyan';
                                     if($count == 0){
-                                       $class = 'bg-pale-warning'; 
+                                       $class = 'bg-pale-warning';
                                     }
                                     $count++;
-                                    
+
                                     $ServerActiveClass = 'label-danger';
                                     if($server['active'] == 'Y'){
                                         $ServerActiveClass = 'label-success';
                                     }
-                                    
+
                                     $ActiveAgentLoginDServerClass = 'label-danger';
                                     if($server['active_agent_login_server'] == 'Y'){
                                         $ActiveAgentLoginDServerClass = 'label-success';
                                     }
-                                    
+
                                     $ActiveAsteriskServerClass = 'label-danger';
                                     if($server['active_asterisk_server'] == 'Y'){
                                         $ActiveAsteriskServerClass = 'label-success';
@@ -364,8 +383,8 @@ FROM ".$listMenu.$MenuConditionList[$key];
                                     if ($web_u_time > $UTIme){
                                         $server_bgcolor='bg-danger';
                                     }
-                                        
-                                    
+
+
                                     ?>
                                 <tr class="<?php echo (!empty($server_bgcolor) && $server_bgcolor) ? $server_bgcolor : $class;?>">
                                     <td><?php echo $server['server_id'];?></td>
@@ -387,24 +406,24 @@ FROM ".$listMenu.$MenuConditionList[$key];
                                 <tr class="bg-pale-yellow">
                                     <th colspan="5">DB Time</th>
                                     <td colspan="5">
-                                        <?php 
+                                        <?php
                                         $DBTime = $database->query('SELECT NOW()')->fetchAll(PDO::FETCH_ASSOC);
                                         ?>
-                                        
+
                                         <?php echo $DBTime[0]['NOW()'];?></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
         <!-- /.row -->
     </section>
-    <!-- /.content --> 
-</div> 
-<?php 
+    <!-- /.content -->
+</div>
+<?php
 /*Total Call Count*/
 $TotalCallCountquery = "SELECT stats_date,sum(total_calls) as total_calls FROM vicidial_daily_max_stats WHERE stats_date > DATE_ADD(CURDATE(), INTERVAL -10 DAY) AND stats_type != 'TOTAL' AND campaign_id IN ('".implode("','",$_SESSION['CurrentLogin']['CampaignID'])."') group by stats_date ORDER BY stats_date DESC";
 $TotalCallCountData = $database->query($TotalCallCountquery)->fetchAll(PDO::FETCH_ASSOC);
@@ -417,26 +436,34 @@ $TotalAgentCountquery = "SELECT stats_date,SUM(max_agents) as max_agents FROM vi
 $TotalAgentCountData = $database->query($TotalAgentCountquery)->fetchAll(PDO::FETCH_ASSOC);
 $AgentCountStatsDATE = array_column($TotalAgentCountData,'stats_date');
 $AgentCounts = array_column($TotalAgentCountData,'max_agents');
-    
+
 
 /*Inbound & Outbound*/
-$QueryForBoth = "SELECT stats_date, 
+$QueryForBoth = "SELECT stats_date,
 SUM(CASE WHEN stats_type='INGROUP' THEN total_calls ELSE NULL END) as 'INBOUND',
-SUM(CASE WHEN stats_type='CAMPAIGN' THEN total_calls ELSE NULL END) as 'OUTBOUND' 
-from 
+SUM(CASE WHEN stats_type='CAMPAIGN' THEN total_calls ELSE NULL END) as 'OUTBOUND'
+from
 vicidial_daily_max_stats where stats_date > DATE_ADD(CURDATE(), INTERVAL -10 DAY) AND campaign_id IN ('".implode("','",$_SESSION['CurrentLogin']['CampaignID'])."') group by stats_date ORDER BY stats_date DESC";
 
 $BothData = $database->query($QueryForBoth)->fetchAll(PDO::FETCH_ASSOC);
 
+
 /*FOR Inbound ONLY*/
-$QueryForInbound = "SELECT 
-sum(CASE WHEN campaign_id='CogentPSP' THEN total_calls ELSE NULL END) as 'CogentPSP', 
+/* $QueryForInbound = "SELECT
+sum(CASE WHEN campaign_id='CogentPSP' THEN total_calls ELSE NULL END) as 'CogentPSP',
 sum(CASE WHEN campaign_id='CogentBureau1' THEN total_calls ELSE NULL END) as 'CogentBureau1',
 stats_date
 FROM vicidial_daily_max_stats WHERE stats_type='INGROUP' AND campaign_id IN ('".implode("','",$_SESSION['CurrentLogin']['CampaignID'])."') AND stats_date > DATE_ADD(CURDATE(), INTERVAL -10 DAY) group by stats_date ORDER BY stats_date DESC";
 
-$InboundData = $database->query($QueryForInbound)->fetchAll(PDO::FETCH_ASSOC);
+$InboundData = $database->query($QueryForInbound)->fetchAll(PDO::FETCH_ASSOC); */
 
+  $QueryForInbound = "SELECT";
+  foreach($Inbound_Groups as $value){
+    $QueryForInbound .= " sum(CASE WHEN campaign_id='".$value["group_name"]."' THEN total_calls ELSE NULL END) as '".$value["group_name"]."', ";
+  }
+  $QueryForInbound .= "stats_date
+  FROM vicidial_daily_max_stats WHERE stats_type='INGROUP' AND campaign_id IN ('".implode("','",$_SESSION['CurrentLogin']['CampaignID'])."') AND stats_date > DATE_ADD(CURDATE(), INTERVAL -10 DAY) group by stats_date ORDER BY stats_date DESC";
+  $InboundData = $database->query($QueryForInbound)->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 <script>
@@ -453,11 +480,11 @@ $InboundData = $database->query($QueryForInbound)->fetchAll(PDO::FETCH_ASSOC);
 				}
 			]
 		};
-		
+
 		var hBar = new Chart(ctx2, {
 			type:"horizontalBar",
 			data:data2,
-			
+
 			options: {
 				tooltips: {
 					mode:"label"
@@ -483,7 +510,7 @@ $InboundData = $database->query($QueryForInbound)->fetchAll(PDO::FETCH_ASSOC);
 							fontColor:"#888888"
 						}
 					}],
-					
+
 				},
 				elements:{
 					point: {
@@ -502,11 +529,11 @@ $InboundData = $database->query($QueryForInbound)->fetchAll(PDO::FETCH_ASSOC);
 					cornerRadius:0,
 					footerFontFamily:"'Poppins'"
 				}
-				
+
 			}
 		});
 	};
-        
+
     if( $('#InboundCall').length > 0 ){
 		var ctx2 = document.getElementById("InboundCall").getContext("2d");
 		var data2 = {
@@ -520,11 +547,11 @@ $InboundData = $database->query($QueryForInbound)->fetchAll(PDO::FETCH_ASSOC);
 				}
 			]
 		};
-		
+
 		var hBar = new Chart(ctx2, {
 			type:"horizontalBar",
 			data:data2,
-			
+
 			options: {
 				tooltips: {
 					mode:"label"
@@ -550,7 +577,7 @@ $InboundData = $database->query($QueryForInbound)->fetchAll(PDO::FETCH_ASSOC);
 							fontColor:"#888888"
 						}
 					}],
-					
+
 				},
 				elements:{
 					point: {
@@ -569,73 +596,91 @@ $InboundData = $database->query($QueryForInbound)->fetchAll(PDO::FETCH_ASSOC);
 					cornerRadius:0,
 					footerFontFamily:"'Poppins'"
 				}
-				
+
 			}
 		});
 	};
-        
-        
-        var bar = new Morris.Bar({
-                element: 'bar-chart_1',
-                resize: true,
-                data: [
-                  <?php foreach($BothData as $dataList){?>
-                  {y: '<?php echo date('M d',strtotime($dataList['stats_date']));?>', a: <?php echo $dataList['OUTBOUND'];?>},
-                  <?php }?>
-                ],
-		barColors: ['#fc4b6c'],
-		barSizeRatio: 0.5,
-		barGap:5,
-		xkey: 'y',
-		ykeys: ['a'],
-		labels: ['Inbound Calls'],
-		hideHover: 'auto',
-		color: '#666666',
-                xLabelMargin: 10
-        });
-        
-        var bar = new Morris.Bar({
-                element: 'bar-chart_2',
-                resize: true,
-                data: [
-                  <?php foreach($BothData as $dataList){?>
-                  {y: '<?php echo date('M d',strtotime($dataList['stats_date']));?>', a: <?php echo $dataList['OUTBOUND'];?>},
-                  <?php }?>
-                ],
-		barColors: ['#26c6da'],
-		barSizeRatio: 0.5,
-		barGap:5,
-		xkey: 'y',
-		ykeys: ['a'],
-		labels: ['Outbound Calls'],
-		hideHover: 'auto',
-		color: '#666666',
-                xLabelMargin: 10
-        });
-    
-    
-    
-    
+
+
+  var bar = new Morris.Bar({
+          element: 'bar-chart_1',
+          resize: true,
+          data: [
+            <?php foreach($BothData as $dataList){
+              if(isset($dataList['INBOUND']) && $dataList['INBOUND'] > 0) { ?>
+            {y: '<?php echo date('M d',strtotime($dataList['stats_date']));?>', a: <?php echo $dataList['OUTBOUND'];?>},
+            <?php } }?>
+          ],
+barColors: ['#fc4b6c'],
+barSizeRatio: 0.5,
+barGap:5,
+xkey: 'y',
+ykeys: ['a'],
+labels: ['Inbound Calls'],
+hideHover: 'auto',
+color: '#666666',
+          xLabelMargin: 10
+  });
+
+  var bar = new Morris.Bar({
+          element: 'bar-chart_2',
+          resize: true,
+          data: [
+            <?php foreach($BothData as $dataList){
+            if(isset($dataList['OUTBOUND']) && $dataList['OUTBOUND'] > 0) {   ?>
+            {y: '<?php echo date('M d',strtotime($dataList['stats_date']));?>', a: <?php echo $dataList['OUTBOUND'];?>},
+            <?php } }?>
+          ],
+barColors: ['#26c6da'],
+barSizeRatio: 0.5,
+barGap:5,
+xkey: 'y',
+ykeys: ['a'],
+labels: ['Outbound Calls'],
+hideHover: 'auto',
+color: '#666666',
+          xLabelMargin: 10
+  });
+
+
+
+
      var bar = new Morris.Bar({
       element: 'bar-chart',
       resize: true,
       data: [
         <?php foreach($InboundData as $dataList){?>
-                  {y: '<?php echo date('M d',strtotime($dataList['stats_date']));?>', a: <?php echo $dataList['CogentPSP'];?>, b: <?php echo $dataList['CogentBureau1'];?>},
+                  {y: '<?php echo date('M d',strtotime($dataList['stats_date']));?>',
+                  <?php $i = 0; foreach($Inbound_Groups as $value){
+                    if($dataList[$value['group_name']] == NULL) {
+                      $val = 0;
+                    } else {
+                      $val = $dataList[$value['group_name']];
+                    }
+                    ?>
+                  a<?php echo $i++; ?>: <?php echo $val; ?>,
+                  <?php } ?>
+                },
                   <?php }?>
       ],
 		barColors: ['#fc4b6c', '#26c6da'],
 		barSizeRatio: 0.5,
 		barGap:5,
 		xkey: 'y',
-		ykeys: ['a', 'b'],
-		labels: ['CogentPSP', 'CogentBureau1'],
+		//ykeys: ['a', 'b'],
+    ykeys: [
+    <?php $i = 0; foreach($Inbound_Groups as $value){ ?>
+      'a<?php echo $i++; ?>',
+    <?php } ?>
+  ],
+		//labels: ['CogentPSP', 'CogentBureau1'],
+    labels: ['<?php echo implode("','",$group_name);?>'],
 		hideHover: 'auto',
 		color: '#666666',
-                xLabelMargin: 10
+    xLabelMargin: 10
     });
-    
-    
-    
-    
+
+
+
+
         </script>

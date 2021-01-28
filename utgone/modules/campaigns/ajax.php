@@ -1,5 +1,5 @@
 <?php
-$case = ['RecycleRule','CampaignCID','active_update','dial_method_update','sql_query','lead_query','sql_dialing_update','SQLDialingActive','SpeedChange','field_update','AudioUpload','TransferPresets','CampaignStatus','CampaignPauseCode','CampaignQueue','hopper-getRuleDetails','hopper-getRuleQuery', 'list_update_status','AllAudioFile','deleteCampaign','Agent_LogOut','SurveyUpdate'];
+$case = ['RecycleRule','CampaignCID','active_update','dial_method_update','sql_query','lead_query','sql_dialing_update','SQLDialingActive','SpeedChange','field_update','AudioUpload','TransferPresets','CampaignStatus','CampaignPauseCode','CampaignQueue','hopper-getRuleDetails','hopper-getRuleQuery', 'list_update_status','AllAudioFile','deleteCampaign','Agent_LogOut','SurveyUpdate','CampaignACCID'];
 if(!empty($_GET['case']) && isset($_GET['case']) && in_array($_GET['case'],$case)){
     if($_GET['case'] == 'RecycleRule'){
         if($_GET['rule'] == 'add'){
@@ -459,7 +459,73 @@ ON l.lead_id=ol.lead_id where ol.campaign_id = '".$Campaign."' AND l.lead_id IN 
        }
          admin_log_insert($database,@$_SESSION['Login']['user'],'CAMPAIGN','MODIFY',$Id,'MODIFY - Campaign Status',$database->last(),'Campaign Status '.$Column,'--All--');
 
-   }elseif($_GET['case'] == 'CampaignPauseCode'){
+   } elseif($_GET['case'] == 'CampaignACCID'){
+       if($_GET['rule'] == 'ADD'){
+         $areacode = $_POST['areacode'];
+         $outbound_cid = $_POST['outbound_cid'];
+         $description = $_POST['description'];
+         $CampaignID = $_POST['campaign_id'];
+         $area_id = $_POST['areaid'];
+         $active = '';
+         if($area_id != '') {
+           $database->update('vicidial_campaign_cid_areacodes',['areacode'=>$areacode,'outbound_cid'=>$outbound_cid,'cid_description'=>$description],['id'=>$area_id]);
+           $dataResponse = $database->get('vicidial_campaign_cid_areacodes','*',['id'=>$area_id]);
+           admin_log_insert($database,@$_SESSION['Login']['user'],'CAMPAIGN', 'ADD',$CampaignID, 'UPDATE - Campaign Areacode',$database->last(),'Campaign Areacode UPDATE','--All--');
+         } else {
+           $database->insert('vicidial_campaign_cid_areacodes',['campaign_id'=>$CampaignID,'areacode'=>$areacode,'outbound_cid'=>$outbound_cid,'cid_description'=>$description,'active'=>$active]);
+           $areaID = $database->id();
+           if(!empty($areaID)){
+               $dataResponse = $database->get('vicidial_campaign_cid_areacodes','*',['id'=>$areaID]);
+          }
+           admin_log_insert($database,@$_SESSION['Login']['user'],'CAMPAIGN', 'ADD',$CampaignID, 'ADD - Campaign Areacode',$database->last(),'Campaign Areacode ADD','--All--');
+         }
+         $result = results('success','Successfully Created!!',$dataResponse);
+        } elseif($_GET['rule'] == 'Delete'){
+          $id = $_GET['id'];
+          $data = $database->delete('vicidial_campaign_cid_areacodes',['id'=>$id]);
+          $result = results('success','Successfully Deleted!!','');
+          admin_log_insert($database,@$_SESSION['Login']['user'],'CAMPAIGN', 'DELETE',$id, 'Campaign Areacode - DELETE',$database->last(),'Campaign Areacode - Delete','--All--');
+        } elseif($_GET['rule'] == 'List'){
+          $id = $_GET['id'];
+          $dataResponse = $database->get('vicidial_campaign_cid_areacodes','*',['id'=>$id]);
+          $result = results('success','Successfully Deleted!!',$dataResponse);
+        } elseif($_GET['rule'] == 'BulkAdd') {
+          $file_name = $_FILES['campaign_area_bulk']['name'];
+          $file_size = $_FILES['campaign_area_bulk']['size'];
+          $file_tmp = $_FILES['campaign_area_bulk']['tmp_name'];
+          $file_type = $_FILES['campaign_area_bulk']['type'];
+          $file_ext = strtolower(end(explode('.', $_FILES['campaign_area_bulk']['name'])));
+
+          $extensions = array('csv');
+
+          $CampaignID = $_POST['campaign_id'];
+
+          if (in_array($file_ext, $extensions) === false) {
+            $result = results('error','extension not allowed, please choose a csv file.!!',NULL);
+          } else {
+            if ($file_size > 0) {
+              $file_data = fopen($file_tmp, 'r');
+
+              while (($column = fgetcsv($file_data)) !== FALSE) {
+                if (isset($column[0]) && $column[0] != '') {
+                    $arrayInsert['areacode'] = $column[0];
+                    $arrayInsert['campaign_id'] = $CampaignID;
+                    $arrayInsert['outbound_cid'] = $column[1];
+                    $arrayInsert['cid_description'] = $column[2];
+                    $dataSave = $database->insert('vicidial_campaign_cid_areacodes', $arrayInsert);
+                }
+
+              }
+
+             if (!empty($dataSave->rowCount()) && $dataSave->rowCount() > 0) {
+                 $result = results('success','Successfully created!!',NULL);
+              } else {
+                  $result = results('error','Something gonna wrong!!',NULL);
+              }
+            }
+          }
+        }
+       } elseif($_GET['case'] == 'CampaignPauseCode'){
        if($_GET['rule'] == 'ADD'){
            $PauseCode = $_POST['code'];
            $PauseCodeName = $_POST['name'];
@@ -1532,8 +1598,8 @@ if (!empty($_GET) && isset($_GET['action']) && $_GET['action']) {
       							}
       						}
       					}
-                if($ad1 > $systemDetail['auto_dial_limit'] && $adl != $systemDetail['auto_dial_limit']){
-                  $ad1 = $systemDetail['auto_dial_limit'];
+                if($adl > $systemDetail['auto_dial_limit'] && $adl != $systemDetail['auto_dial_limit']){
+                  $adl = $systemDetail['auto_dial_limit'];
                 }
                 $eachData['Speed'] .= '<option value="'.$adl.'"';
                 if(trim($adl) == $row['auto_dial_level']) {
@@ -1642,9 +1708,14 @@ if (!empty($_GET) && isset($_GET['action']) && $_GET['action']) {
             if (checkRole('campaigns', 'edit')) {
                 $EditAction = '<a href="'.base_url('campaigns/edit').'?campaign_id=' . $row['campaign_id'] . '" class="btn btn-app btn-success" title="Campaign Detail"><i class="fa fa-arrow-right"></i></a>';
                 $EditAction1 = '<a href="javascript:void(0);" class="btn btn-app btn-warning AgentLogOut" data-id="'.$row['campaign_id'].'" title="Logout All Agent"><i class="fa fa-sign-out"></i></a>';
+            } else {
+              $EditAction = '';
+              $EditAction1 = '';
             }
             if (checkRole('campaigns', 'delete')) {
                 $RemoveAction = '<a href="javascript:void(0);" class="btn btn-app btn-danger RemoveCampaign" data-id="'.$row['campaign_id'].'" title="Remove Campaign"><i class="fa fa-times"></i></a>';
+            } else {
+              $RemoveAction = '';
             }
             $eachData['action'] = '<div style="width:105px">' . $EditAction .$EditAction1 . $RemoveAction . '</div>';
 //           $eachData['action'] ='<ul class="btn-ul" style="display:inline"><li>

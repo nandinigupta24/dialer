@@ -250,7 +250,7 @@
 
             setInterval( function () {
                 dt.ajax.reload();
-            }, 30000 );
+            }, 150000 );
 
             $(document).on('click', '.CampaignInactiveButton', function (e) {
                 var input = $(this).attr('data-input');

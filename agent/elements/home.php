@@ -1,7 +1,7 @@
 <?php
 $UserDetail = $database->get('vicidial_users', '*', ['user' => $VD_login]);
 
-$agent_data = $DBUTG->get('agent_page_setting',['id','inbound_call_drop','comment_on_call_recording','agent_screen']);
+$agent_data = $DBUTG->get('agent_page_setting',['id','comment_on_call_recording','agent_screen']);
 ?>
 
 <!DOCTYPE html>
@@ -305,7 +305,7 @@ $agent_data = $DBUTG->get('agent_page_setting',['id','inbound_call_drop','commen
                                     </div>
                                 </li>
 
-                                <?php if(isset($agent_data) && $agent_data['inbound_call_drop'] == 'Y') { ?>
+                                <?php if($inbound_call_drop == 'Y') { ?>
                                 <li class="dropdown messages-menu">
                                     <a href="#" class="dropdown-toggle InboundCallDrop" data-toggle="dropdown" aria-expanded="false">
                                         <i class="mdi mdi-phone-missed"></i>
@@ -415,7 +415,7 @@ $agent_data = $DBUTG->get('agent_page_setting',['id','inbound_call_drop','commen
                         <li>&nbsp;</li>
                         <li>&nbsp;</li>
                         <li class="hidden" id="DTMF-Model"><a href="" class="btn btn-primary DTMF-BTN-keyboard" data-toggle="modal" data-target="#DTMF-Modal"><i class="fa fa-keyboard-o"></i></a></li>
-                        <?php if (!in_array($dial_method, ['INBOUND_MAN'])) { ?>
+                        <?php if (!in_array($dial_method, ['INBOUND_MAN', 'MANUAL'])) { ?>
                             <li class="" id="CallPause"> <a href="javascript:void(0);" class="btn btn-success" onclick="AutoDial_ReSume_PauSe('VDADready', '', '', '', '', '', '', 'YES');" title="Go Ready"> <i class="fa fa-play"></i> </a> </li>
                         <?php } ?>
                         <?php if (in_array($dial_method, ['INBOUND_MAN', 'MANUAL'])) { ?>
@@ -611,9 +611,11 @@ $agent_data = $DBUTG->get('agent_page_setting',['id','inbound_call_drop','commen
                             </div>
                             <!-- /.col -->
                             <?php
-                            $data1 = $database->query("SELECT SUM(length_in_sec) as utg_call_length FROM vicidial_log VCL where VCL.call_date >= '" . date('Y-m-d') . " 00:00:00' AND VCL.call_date <= '" . date("Y-m-d") . " 23:59:59' AND VCL.user = '" . $VD_login . "' AND VCL.campaign_id = '" . $VD_campaign . "' GROUP BY campaign_id ORDER BY VCL.call_date DESC")->fetchAll(PDO::FETCH_ASSOC);
+                            /* $data1 = $database->query("SELECT SUM(length_in_sec) as utg_call_length FROM vicidial_log VCL where VCL.call_date >= '" . date('Y-m-d') . " 00:00:00' AND VCL.call_date <= '" . date("Y-m-d") . " 23:59:59' AND VCL.user = '" . $VD_login . "' AND VCL.campaign_id = '" . $VD_campaign . "' GROUP BY campaign_id ORDER BY VCL.call_date DESC")->fetchAll(PDO::FETCH_ASSOC);
 
-                            $data2 = $database->query("SELECT SUM(length_in_sec) as utg_call_length FROM vicidial_closer_log VCL where VCL.call_date >= '" . date('Y-m-d') . " 00:00:00' AND VCL.call_date <= '" . date("Y-m-d") . " 23:59:59' AND VCL.user = '" . $VD_login . "' AND VCL.campaign_id = '" . $VD_campaign . "' GROUP BY campaign_id ORDER BY VCL.call_date DESC")->fetchAll(PDO::FETCH_ASSOC);
+                            $data2 = $database->query("SELECT SUM(length_in_sec) as utg_call_length FROM vicidial_closer_log VCL where VCL.call_date >= '" . date('Y-m-d') . " 00:00:00' AND VCL.call_date <= '" . date("Y-m-d") . " 23:59:59' AND VCL.user = '" . $VD_login . "' AND VCL.campaign_id = '" . $VD_campaign . "' GROUP BY campaign_id ORDER BY VCL.call_date DESC")->fetchAll(PDO::FETCH_ASSOC); */
+
+                            $utg_call_length = $database->query("SELECT (SELECT SUM(length_in_sec) FROM vicidial_log VCL where VCL.call_date >= '" . date('Y-m-d') . " 00:00:00' AND VCL.call_date <= '" . date("Y-m-d") . " 23:59:59' AND VCL.user = '" . $VD_login . "' AND VCL.campaign_id = '" . $VD_campaign . "' GROUP BY VCL.user ORDER BY VCL.call_date DESC) AS inbound, (SELECT SUM(length_in_sec) as utg_call_length FROM vicidial_closer_log VCL where VCL.call_date >= '" . date('Y-m-d') . " 00:00:00' AND VCL.call_date <= '" . date("Y-m-d") . " 23:59:59' AND VCL.user = '" . $VD_login . "' AND VCL.campaign_id = '" . $VD_campaign . "' GROUP BY VCL.user ORDER BY VCL.call_date DESC) AS outbound")->fetchAll(PDO::FETCH_ASSOC);
 
                             $utg_call_length = array_merge($data1, $data2);
                             /*  $Performance = $database->query("Select Email,Chat,Calls,Connects,DMCs,Sales,LOWER(user) as USERID, campaign_id,SEC_TO_TIME(TalkSeconds) as Talk,SEC_TO_TIME(PauseSeconds) as Pause,  SEC_TO_TIME(WaitSeconds) as Wait,  SEC_TO_TIME(DispoSeconds) as Dispo, TotalDMCTalkSecs
@@ -697,10 +699,10 @@ ORDER BY campaign_id")->fetchAll(PDO::FETCH_ASSOC);
                             $TotalTime = ($Wait + $Talk + $Wrap + $Pause);
 
                             $percentageArray = array();
-                            $percentageArray['Talk'] = isset($TotalTime) ? round((($Talk / $TotalTime) * 100)) : 0;
-                            $percentageArray['Pause'] = isset($TotalTime) ? round((($Pause / $TotalTime) * 100)) : 0;
-                            $percentageArray['Wait'] = isset($TotalTime) ? round((($Wait / $TotalTime) * 100)) : 0;
-                            $percentageArray['Dispo'] = isset($TotalTime) ? round((($Wrap / $TotalTime) * 100)) : 0;
+                            $percentageArray['Talk'] = (isset($TotalTime) && $TotalTime != 0) ? round((($Talk / $TotalTime) * 100)) : 0;
+                            $percentageArray['Pause'] = (isset($TotalTime) && $TotalTime != 0) ? round((($Pause / $TotalTime) * 100)) : 0;
+                            $percentageArray['Wait'] = (isset($TotalTime) && $TotalTime != 0) ? round((($Wait / $TotalTime) * 100)) : 0;
+                            $percentageArray['Dispo'] = (isset($TotalTime) && $TotalTime != 0) ? round((($Wrap / $TotalTime) * 100)) : 0;
                             ;
                             ?>
                             <div class="col-12 col-lg-3">
@@ -946,7 +948,7 @@ ORDER BY campaign_id")->fetchAll(PDO::FETCH_ASSOC);
                                                     <!-- small box -->
                                                     <div class="small-box bg-default">
                                                         <div class="inner">
-                                                            <h3><?php echo (isset($TotalCall) ? round((($Performance['Calls'] / $TotalCall) * 100)) : 0); ?>%</h3>
+                                                            <h3><?php echo ((isset($TotalCall) && $TotalCall != 0) ? round((($Performance['Calls'] / $TotalCall) * 100)) : 0); ?>%</h3>
 
                                                             <p>Calls</p>
                                                         </div>
@@ -960,7 +962,7 @@ ORDER BY campaign_id")->fetchAll(PDO::FETCH_ASSOC);
                                                     <!-- small box -->
                                                     <div class="small-box bg-default">
                                                         <div class="inner">
-                                                            <h3><?php echo (isset($TotalCall) ? round((($Performance['Connects'] / $TotalCall) * 100)) : 0); ?>%</h3>
+                                                            <h3><?php echo ((isset($TotalCall) && $TotalCall != 0) ? round((($Performance['Connects'] / $TotalCall) * 100)) : 0); ?>%</h3>
 
                                                             <p>Avg Connects</p>
                                                         </div>
@@ -974,7 +976,7 @@ ORDER BY campaign_id")->fetchAll(PDO::FETCH_ASSOC);
                                                     <!-- small box -->
                                                     <div class="small-box bg-default">
                                                         <div class="inner">
-                                                            <h3><?php echo (isset($TotalCall) ? round((($Performance['DMCs'] / $TotalCall) * 100)) : 0); ?>%</h3>
+                                                            <h3><?php echo ((isset($TotalCall) && $TotalCall != 0) ? round((($Performance['DMCs'] / $TotalCall) * 100)) : 0); ?>%</h3>
 
                                                             <p>Avg DMCs</p>
                                                         </div>
@@ -988,7 +990,7 @@ ORDER BY campaign_id")->fetchAll(PDO::FETCH_ASSOC);
                                                     <!-- small box -->
                                                     <div class="small-box bg-default">
                                                         <div class="inner">
-                                                            <h3><?php echo (isset($TotalCall) ? round((($Performance['Sales'] / $TotalCall) * 100)) : 0); ?>%</h3>
+                                                            <h3><?php echo ((isset($TotalCall) && $TotalCall != 0) ? round((($Performance['Sales'] / $TotalCall) * 100)) : 0); ?>%</h3>
 
                                                             <p>Avg Sales</p>
                                                         </div>
@@ -1459,11 +1461,12 @@ ORDER BY campaign_id")->fetchAll(PDO::FETCH_ASSOC);
                 );
 
                 $('#datepicker').datepicker({
-                    autoclose: true
+                    autoclose: true,
+                    format: 'dd-mm-yyyy',
                 });
+
                 $('.datepicker').datepicker({
                     autoclose: true,
-                    dateFormat: 'yy-mm-dd',
                 });
                 $('.timepicker').timepicker({
                     showInputs: false

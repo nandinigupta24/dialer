@@ -18,7 +18,7 @@ if ($_GET['rule'] == 'Save') {
         $Recipients = $_POST['recipients'];
         $Weekends = $_POST['weekends'];
         $AttachmentType = $_POST['attachment_type'];
-        $WeekDay = $_POST['week_day'];
+        $time = $_POST['email_time'];
 
         $arrayInsert = [];
         $arrayInsert['name'] = $Name;
@@ -30,9 +30,7 @@ if ($_GET['rule'] == 'Save') {
         $arrayInsert['weekends'] = $Weekends;
         $arrayInsert['attachment_type'] = $AttachmentType;
         $arrayInsert['status'] = 'Y';
-        if ($Type == 'weekly') {
-            $arrayInsert['status'] = $WeekDay;
-        }
+        $arrayInsert['email_time'] = $time;
         $arrayInsert['created_at'] = date('Y-m-d H:i:s');
         $arrayInsert['updated_at'] = date('Y-m-d H:i:s');
 
@@ -58,7 +56,7 @@ if ($_GET['rule'] == 'Save') {
         $Recipients = $_POST['recipients'];
         $Weekends = $_POST['weekends'];
         $AttachmentType = $_POST['attachment_type'];
-        $WeekDay = $_POST['week_day'];
+        $time = $_POST['email_time'];
 
         $arrayInsert = [];
         $arrayInsert['name'] = $Name;
@@ -68,10 +66,8 @@ if ($_GET['rule'] == 'Save') {
         $arrayInsert['recipients'] = $Recipients;
         $arrayInsert['weekends'] = $Weekends;
         $arrayInsert['attachment_type'] = $AttachmentType;
+        $arrayInsert['email_time'] = $time;
         $arrayInsert['updated_at'] = date('Y-m-d H:i:s');
-        if ($Type == 'weekly') {
-            $arrayInsert['status'] = $WeekDay;
-        }
         $data = $DBUTG->update($table, $arrayInsert, ['id' => $ID]);
         if ($data->rowCount() > 0) {
             $result = response(1, 0, 'Your Email Report has been successfully updated!!', NULL);

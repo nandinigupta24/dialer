@@ -1,6 +1,6 @@
 <div class="panel pn">
     <div class="panel-heading">
-        <span class="panel-title"><i class="fa fa-list-ol"></i> Queue Staregy </span>
+        <span class="panel-title"><i class="fa fa-list-ol"></i> Queue Strategy </span>
     </div>
     <div class="panel-body pn">
         <div class="form-group">

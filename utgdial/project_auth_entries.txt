@@ -1,0 +1,5 @@
+ADMIN|FAIL|2020-12-18 17:54:31|X|BAD|106.223.141.181|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36|
+ADMIN|FAIL|2020-12-19 16:25:52|X|BAD|27.63.134.220|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36|
+ADMIN|FAIL|2020-12-21 14:43:49|X|BAD|162.12.247.40|Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36|
+ADMIN|FAIL|2020-12-22 18:04:25|X|BAD|162.12.247.40|Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36|
+ADMIN|FAIL|2020-12-22 18:16:35|X|BAD|106.195.102.195|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36|

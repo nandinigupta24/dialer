@@ -18,7 +18,7 @@ if(!empty($_POST) && $_POST){
     }
 }
 
-$agent_data = $DBUTG->get('agent_page_setting',['inbound_call_drop','comment_on_call_recording','agent_screen']);
+$agent_data = $DBUTG->get('agent_page_setting',['comment_on_call_recording','agent_screen']);
 ?>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -36,15 +36,6 @@ $agent_data = $DBUTG->get('agent_page_setting',['inbound_call_drop','comment_on_
                         <form method="POST" accept-charset="UTF-8" autocomplete="off">
 
                             <div class="pad">
-                                <div class="form-group row">
-                                    <label for="extension_number" class="col-sm-2 col-form-label">Inbound Call Drop</label>
-                                    <div class="col-sm-4">
-                                      <button type="button" class="btn btn-sm btn-toggle manage-agent <?php echo ($agent_data['inbound_call_drop'] == 'Y') ? 'active' : ''; ?>" data-toggle="button" aria-pressed="true" autocomplete="off" data-field="inbound_call_drop">
-                                          <div class="handle"></div>
-                                      </button>
-                                      <input type="hidden" name="inbound_call_drop" value="<?php echo $agent_data['inbound_call_drop'] ?>">
-                                    </div>
-                                </div>
                                 <div class="form-group row">
                                     <label for="extension_number" class="col-sm-2 col-form-label">Comment to the Call Recording</label>
                                     <div class="col-sm-4">

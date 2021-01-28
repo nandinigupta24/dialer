@@ -42,6 +42,7 @@
                                 <th>Wait</th>
                                 <th>Pause</th>
                                 <th>Wrap</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -100,6 +101,9 @@
                 {"data": "WaitTime"},
                 {"data": "PauseTime"},
                 {"data": "DispoTime"},
+                {"mRender": function (data,type, row) {
+                    return '<a href="<?php echo base_url('inbound/calls_drilldown');?>?AgentID='+row.user+'" class="btn btn-success btn-app" title="View Detail"><i class="fa fa-list"></i></a>';
+                }}
             ],
 
         });
@@ -114,7 +118,7 @@
                         'This Month': [moment().startOf('month'), moment().endOf('month')],
                         'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
                     },
-                    startDate: moment().subtract(29, 'days'),
+                    startDate: moment(),
                     endDate: moment()
                 },
                 function (start, end) {
@@ -157,6 +161,9 @@
                             {"data": "WaitTime"},
                             {"data": "PauseTime"},
                             {"data": "DispoTime"},
+                            {"mRender": function (data,type, row) {
+                                    return '<a href="<?php echo base_url('inbound/calls_drilldown');?>?AgentID='+row.user+'&start='+start+'&end='+end+'" class="btn btn-primary btn-app" title="View Detail"><i class="fa fa-list"></i></a>';
+                            }}
                         ]
 
                     });

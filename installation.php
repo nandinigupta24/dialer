@@ -90,7 +90,6 @@
 				}
 	
                 $link = mysqli_connect($server_string, "$DBUser", "$DBPass", "asterisk", $VARDB_port);
-                die($link);
 
                 /* Delete Index HTML */
                 unlink("index.html");
@@ -167,7 +166,8 @@
 (7,	1,	'7',	'Y',	'Y',	'Y',	'Y',	'$date',	NULL),
 (8,	1,	'8',	'Y',	'Y',	'Y',	'Y',	'$date',	NULL),
 (9,	1,	'9',	'Y',	'Y',	'Y',	'Y',	'$date',	NULL),
-(10,	1,	'9',	'Y',	'Y',	'Y',	'Y',	'$date',	NULL)";
+(10, 1,	'10',	'Y',	'Y',	'Y',	'Y',	'$date',	NULL)
+(11, 1,	'11',	'Y',	'Y',	'Y',	'Y',	'$date',	NULL)";
 
                 mysql_to_mysqli($RolePermissionQuery, $UTGLink);
                 $affected_rows = mysqli_affected_rows($UTGLink);
@@ -246,7 +246,8 @@
 (7,	'SMS',	NULL,	'SMS',	'sms',	'Y',	'2019-09-03 17:14:13',	NULL),
 (8,	'Settings',	NULL,	'Settings',	'settings',	'Y',	'2019-09-03 17:14:13',	NULL),
 (9,	'Admin Settings',	NULL,	'Admin Settings',	'admin_settings',	'Y',	'2019-09-03 17:14:13',	NULL),
-(10,	'leaderboard',	NULL,	'LeaderBoard',	'leaderboard',	'Y',	'2020-01-02 15:27:19',	NULL);";
+(10, 'leaderboard',	NULL,	'LeaderBoard',	'leaderboard',	'Y',	'2020-01-02 15:27:19',	NULL),
+(11, 'Remote Agents',	NULL, 'Remote Agents', 'remote_agents',	'Y',	'2020-01-02 15:27:19',	NULL);";
 
                 mysql_to_mysqli($ModulesQuery, $link);
                 $ModuleAffectedRows = mysqli_affected_rows($link);

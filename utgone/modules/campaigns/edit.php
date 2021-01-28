@@ -96,6 +96,7 @@ $statistics[0]['DROP_Percentage'] = get_campaigns_DROP_RATE($database, $Campaign
 //>>>>>>> 6ecee07d15e5cbddf4ae8acbd591604f1cac0b25
     $campaignStatus = $database->query("SELECT * FROM `vicidial_campaign_statuses` WHERE (campaign_id is NULL OR campaign_id = '".$CampaignID."') AND Status_Type is NOT NULL")->fetchAll(PDO::FETCH_ASSOC);
 
+
 //    $AllStatus = $database->query("SELECT * FROM `vicidial_campaign_statuses` WHERE (campaign_id is NULL OR campaign_id = '".$CampaignID."') AND Status_Type is NOT NULL ORDER BY status ASC")->fetchAll(PDO::FETCH_ASSOC);
     $AllStatus = $database->query("SELECT
 status,status_name,campaign_id,Status_Type
@@ -269,7 +270,11 @@ VAL.status IN (SELECT status FROM vicidial_campaign_statuses WHERE sale='Y')";
                                     <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#tabCampStatus" data-pop="popover" title="Status" data-content="Manage the Status for this campaign" role="tab" data-original-title="Campaign Status" aria-selected="false"><span class="fa fa-tag"></span></a> </li>
                                     <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#tabRcRule" data-pop="popover" title="Recycle Rule" data-content="Manage the recycle rule for this campaign" role="tab" aria-selected="false" data-original-title="Recycle Rules"><span class="fa fa-clock-o"></span></a> </li>
                                     <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#tagDB" role="tab" aria-selected="false"><span class="fa fa-database"></span></a> </li>
+                                    <?php if($CampaignDetail['areacode'] == 'Y') { ?>
+                                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#tagACID" title="Campaign Areacode" role="tab" aria-selected="false"><span class="fa fa-bars"></span></a> </li>
+                                  <?php } if($CampaignDetail['hide_survey'] == 'N') { ?>
                                     <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#tagSurvey" role="tab" aria-selected="false" title="Survey"><span class="fa fa-bar-chart"></span></a> </li>
+                                  <?php } ?>
 
                                 </ul>
 
@@ -300,7 +305,10 @@ VAL.status IN (SELECT status FROM vicidial_campaign_statuses WHERE sale='Y')";
                                 <div class="tab-pane" id="tagDB" role="tabpanel">
                                     <?php require 'manage/db.php'; ?>
                                 </div>
-                               <div class="tab-pane" id="tagSurvey" role="tabpanel">
+                                <div class="tab-pane" id="tagACID" role="tabpanel">
+                                     <?php require 'manage/acid.php'; ?>
+                                </div>
+                                <div class="tab-pane" id="tagSurvey" role="tabpanel">
                                     <?php require 'manage/survey.php'; ?>
                                 </div>
                                 <!-- nav tab-->

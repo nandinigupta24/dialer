@@ -100,7 +100,7 @@ WHERE VUG.status = 'Y' AND VU.user = '".$Username."' AND VU.pass = '".$Password.
                     <div class="h-100 d-flex bg-white justify-content-center align-items-center col-md-12 col-lg-8">
 
                         <div class="mx-auto app-login-box col-sm-12 col-md-10 col-lg-9">
-                            <div class="mb-5"><img src="https://www.utgone.com/assets/img/logo/logo.png" ></div>
+                            <div class="mb-5"><img src="../assets/images/logo/logo.png" ></div>
 
                             <?php if (!empty($_SESSION['msg']) && $_SESSION['msg']) { ?>
 

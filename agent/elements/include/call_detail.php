@@ -11,7 +11,7 @@
     <div class="box-body">
         <table class="table table-bordered table-striped" id="display-Performance">
             <thead class="bg-success">
-                <tr><th>Date</th><th>Customer ID</th><th>Customer</th><th>Length(s)</th><th>Status</th></tr>
+                <tr><th>Date</th><th>Customer ID</th><th>Phone Number</th><th>Customer</th><th>Length(s)</th><th>Status</th></tr>
             </thead>
             <tbody>
                 <?php foreach($data as $value){?>
@@ -24,6 +24,7 @@
 
                     <td><?php echo $value['call_date']; ?></td>
                     <td><?php echo $value['lead_id']; ?></td>
+                    <td><?php echo $value['phone_number']; ?></td>
                     <td><?php echo $value['first_name'].' '.$value['last_name'];?></td>
                     <td><?php echo $value['length_in_sec']; ?></td>
                     <td><?php echo $value['status']; ?></td>

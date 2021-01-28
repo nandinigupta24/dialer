@@ -7,7 +7,7 @@
  */
 
 require '../../db/database.php';
-require '../../email/Email.php';
+//require '../../email/Email.php';
 
 $mail = new CI_Email;
 $mail->initialize(array(
@@ -61,5 +61,5 @@ if ($Method == 'ExceedLimit') {
         }
     }
 } else {
-    
+
 }

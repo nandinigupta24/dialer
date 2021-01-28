@@ -203,6 +203,10 @@ if (isset($_GET["report_display_type"]))			{$report_display_type=$_GET["report_d
 	elseif (isset($_POST["report_display_type"]))	{$report_display_type=$_POST["report_display_type"];}
 if (isset($_GET["mobile_device"]))				{$mobile_device=$_GET["mobile_device"];}
 	elseif (isset($_POST["mobile_device"]))	{$mobile_device=$_POST["mobile_device"];}
+  else {$mobile_device='';}
+  $HDsessionid = '';
+  $HDpause = '';
+  $HDigcall = '';
 /*Agent View*/
 if(isset($_GET['AgentView'])){
     $AgentView = $_GET['AgentView'];
@@ -524,6 +528,8 @@ $LOGadmin_viewable_call_times =	$row[3];
 $LOGadmin_viewable_groupsSQL='';
 $valLOGadmin_viewable_groupsSQL='';
 $vmLOGadmin_viewable_groupsSQL='';
+$rawLOGadmin_viewable_groupsSQL = '';
+$whereLOGadmin_viewable_groupsSQL='';
 
 if ( (!preg_match('/\-\-ALL\-\-/i',$LOGadmin_viewable_groups)) and (strlen($LOGadmin_viewable_groups) > 3) )
 	{
@@ -620,11 +626,14 @@ while($i < $group_ct)
 
 	$i++;
 	}
-$group_SQL = preg_replace('/,$/i', '',$group_SQL);
+$group_SQL = isset($group_SQL) ? preg_replace('/,$/i', '',$group_SQL) : '';
 
 $i=0;
 $user_group_string='|';
 $user_group_ct = count($user_group_filter);
+$user_group_SQL = isset($user_group_SQL) ? $user_group_SQL : '';
+$usergroupQS = isset($usergroupQS) ? $usergroupQS : '';
+
 while($i < $user_group_ct)
 	{
 	$user_group_filter[$i] = preg_replace("/'|\"|\\\\|;/","",$user_group_filter[$i]);
@@ -738,6 +747,7 @@ $select_list .= "<BR><font class=\"top_settings_val\">"._QXZ("(To select more th
 $select_list .= "<BR><BR>"._QXZ("Select User Groups").": <BR>";
 $select_list .= "<SELECT SIZE=8 NAME=user_group_filter[] ID=user_group_filter[] multiple>";
 $o=0;
+$user_group_filter_string = isset($user_group_filter_string) ? $user_group_filter_string : '';
 while ($o < $usergroups_to_print)
 	{
 	if (preg_match("/\|$usergroups[$o]\|/",$user_group_filter_string))
@@ -1290,6 +1300,7 @@ $stmt = "SELECT group_id from vicidial_inbound_groups;";
 $rslt=mysql_to_mysqli($stmt, $link);
 $ingroups_to_print = mysqli_num_rows($rslt);
 $c=0;
+$ALLcloser_campaignsSQL = isset($ALLcloser_campaignsSQL) ? $ALLcloser_campaignsSQL : '';
 while ($ingroups_to_print > $c)
 	{
 	$row=mysqli_fetch_row($rslt);
@@ -1530,6 +1541,8 @@ group by vcl.dialstatus";
 		$rslt=mysql_to_mysqli($stmtB, $link);
 		$car_to_print = mysqli_num_rows($rslt);
 		$ctp=0;
+    $TFhour_total = isset($TFhour_total) ? $TFhour_total : '';
+    $dialstatuses = isset($dialstatuses) ? $dialstatuses : '';
 		while ($car_to_print > $ctp)
 			{
 			$row=mysqli_fetch_row($rslt);
@@ -1573,6 +1586,7 @@ group by vcl.dialstatus";
 			$rslt=mysql_to_mysqli($stmtB, $link);
 			$scar_to_print = mysqli_num_rows($rslt);
 			$print_sctp=0;
+      $SIXhour_total = isset($SIXhour_total) ? $SIXhour_total : '';
 			while ($scar_to_print > $print_sctp)
 				{
 				$row=mysqli_fetch_row($rslt);
@@ -1600,6 +1614,7 @@ group by vcl.dialstatus";
 			$rslt=mysql_to_mysqli($stmtB, $link);
 			$scar_to_print = mysqli_num_rows($rslt);
 			$print_sctp=0;
+      $ONEhour_total = isset($ONEhour_total) ? $ONEhour_total : '';
 			while ($scar_to_print > $print_sctp)
 				{
 				$row=mysqli_fetch_row($rslt);
@@ -1627,6 +1642,7 @@ group by vcl.dialstatus";
 			$rslt=mysql_to_mysqli($stmtB, $link);
 			$scar_to_print = mysqli_num_rows($rslt);
 			$print_sctp=0;
+      $FTminute_total = isset($FTminute_total) ? $FTminute_total : '';
 			while ($scar_to_print > $print_sctp)
 				{
 				$row=mysqli_fetch_row($rslt);
@@ -1654,6 +1670,7 @@ group by vcl.dialstatus";
 			$rslt=mysql_to_mysqli($stmtB, $link);
 			$scar_to_print = mysqli_num_rows($rslt);
 			$print_sctp=0;
+      $FIVEminute_total = isset($FIVEminute_total) ? $FIVEminute_total : '';
 			while ($scar_to_print > $print_sctp)
 				{
 				$row=mysqli_fetch_row($rslt);
@@ -1684,6 +1701,7 @@ group by vcl.dialstatus";
 			$rslt=mysql_to_mysqli($stmtB, $link);
 			$scar_to_print = mysqli_num_rows($rslt);
 			$print_sctp=0;
+      $ONEminute_total = isset($ONEminute_total) ? $ONEminute_total : '';
 			while ($scar_to_print > $print_sctp)
 				{
 				$row=mysqli_fetch_row($rslt);

@@ -1580,12 +1580,12 @@ function login_user_setup($database,$user,$DBUTG){
         $CampaignListings = $database->select('vicidial_campaigns',['campaign_id']);
         $Campaign = [];
         foreach($CampaignListings as $value){
-         $Campaign[] = $value['campaign_id'];     
+         $Campaign[] = $value['campaign_id'];
         }
     } else {
         $Campaign = array_filter(explode(' ', str_replace('-', '', $LOGallowed_campaigns)));
     }
-    
+
     if(!empty($UserDetail['allowed_teams_access'])){
         $explode = explode(' ',$UserDetail['allowed_teams_access']);
         $UserGroup = $database->select('vicidial_user_groups', ['allowed_campaigns'], ['user_group' => $explode]);
@@ -1594,18 +1594,18 @@ function login_user_setup($database,$user,$DBUTG){
             $campaign1 = array_filter(explode(' ', str_replace('-', '', $LOGallowed_campaigns)));
             $Campaign = array_merge($Campaign,$campaign1);
         }
-        
+
     }
-    
-        
-   
+
+
+
     $_SESSION['CurrentLogin'] = [];
      if(!empty($Campaign) && count($Campaign) > 0){
         $_SESSION['CurrentLogin']['Campaign'] = $Campaign;
     }else{
         $_SESSION['CurrentLogin']['Campaign'] = [999999999999];
     }
-    $arrayCombine = [];  
+    $arrayCombine = [];
     $_SESSION['CurrentLogin']['user'] = $UserDetail['user'];
     $_SESSION['CurrentLogin']['full_name'] = $UserDetail['full_name'];
     $_SESSION['CurrentLogin']['user_level'] = $UserDetail['user_level'];
@@ -1621,23 +1621,24 @@ function login_user_setup($database,$user,$DBUTG){
     $arrayCombine[] = $UserDetail['user_group'];
     $_SESSION['CurrentLogin']['allowed_teams_access'] = $arrayCombine;
     $_SESSION['CurrentLogin']['ChatID'] = $ChatID;
-            
-        
+    $_SESSION['CurrentLogin']['Lock'] = 1;
+
+
     $UserGroupArray = [];
     $UserGroupArray[] = $UserDetail['user_group'];
-    if(!empty($UserDetail['allowed_teams_access'])){  
+    if(!empty($UserDetail['allowed_teams_access'])){
         $explode = explode(' ',$UserDetail['allowed_teams_access']);
         foreach($explode as $valExplode){
             if(!empty(trim($valExplode))){
                 $UserGroupArray[] = trim($valExplode);
-            } 
-        } 
-    }     
+            }
+        }
+    }
     if(!empty($UserDetail['phone_login']) && $UserDetail['phone_login']){
         $PhoneData = $database->get('phones','pass',['login'=>$UserDetail['phone_login']]);
         $_SESSION['CurrentLogin']['phone_pass'] = $PhoneData;
     }
-    
+
     if($UserDetail['user_group'] != 'ADMIN'){
         $UserGroupDetail = array_column($database->select('vicidial_inbound_groups',['group_id'],['user_group'=>$UserDetail['user_group']]),'group_id');
     }else{
@@ -1645,13 +1646,13 @@ function login_user_setup($database,$user,$DBUTG){
     }
     $_SESSION['CurrentLogin']['InboundGroup'] = $UserGroupDetail;
     $_SESSION['CurrentLogin']['CampaignID'] = array_merge($UserGroupDetail,$Campaign);
-    
+
     $LicensingID = $DBUTG->get('user_licensings','licensing_id',['user_group'=>$UserDetail['user_group'],'ORDER'=>['id'=>'DESC']]);
     $_SESSION['CurrentLogin']['License']['ID'] = $LicensingID;
     $LicensingDetail = $DBUTG->get('licensings',['title','modules'],['id'=>$LicensingID]);
     $_SESSION['CurrentLogin']['License']['Title'] = $LicensingDetail['title'];
     $LicensingModules = $DBUTG->select('licensing_modules','module_title',['id'=>unserialize($LicensingDetail['modules'])]);
-    
+
     foreach($LicensingModules as $module){
         $_SESSION['CurrentLogin']['License'][$module] = 'Active';
     }
@@ -1668,10 +1669,10 @@ function initials($str) {
 function get_campaigns_DROP_RATE_OLD($database,$campaign_id){
     $query = "SELECT count(CASE WHEN status = 'DROP' THEN 1 END) AS 'DROP',count(*) AS 'TOTAL' FROM vicidial_agent_log WHERE campaign_id = '".$campaign_id."' AND lead_id is NOT NULL AND event_time BETWEEN '".date('Y-m-d')." 00:00:00' AND '".date('Y-m-d')." 23:59:59'";
     $data = $database->query($query)->fetchAll(PDO::FETCH_ASSOC);
-    
+
     $result = (($data[0]['DROP']/$data[0]['TOTAL'])*100);
-    
-    return round($result,2); 
+
+    return round($result,2);
 }
 function get_campaigns_DROP_RATE($database,$campaign_id){
     $start = $end = date('Y-m-d');
@@ -1682,13 +1683,13 @@ function get_campaigns_DROP_RATE($database,$campaign_id){
     $campaignArray[] = $campaign_id;
     $totalArray = [];
     $totalArray['Outbound']['Drop'] = $database->count('vicidial_log',['AND'=>['call_date[>=]'=>$start.' 00:00:00','call_date[<=]'=>$end.' 23:59:59','campaign_id'=>$campaign_id,'status'=>'DROP']]);
-   
+
     $totalArray['Outbound']['Total'] = $database->count('vicidial_log',['AND'=>['call_date[>=]'=>$start.' 00:00:00','call_date[<=]'=>$end.' 23:59:59','campaign_id'=>$campaign_id]]);
     $totalArray['Inbound']['Drop'] = $database->count('vicidial_closer_log',['AND'=>['call_date[>=]'=>$start.' 00:00:00','call_date[<=]'=>$end.' 23:59:59','campaign_id'=>$campaignArray,'status'=>'DROP']]);
-    $totalArray['Inbound']['Total'] = $database->count('vicidial_closer_log',['AND'=>['call_date[>=]'=>$start.' 00:00:00','call_date[<=]'=>$end.' 23:59:59','campaign_id'=>$campaignArray]]); 
-    
+    $totalArray['Inbound']['Total'] = $database->count('vicidial_closer_log',['AND'=>['call_date[>=]'=>$start.' 00:00:00','call_date[<=]'=>$end.' 23:59:59','campaign_id'=>$campaignArray]]);
+
 //    $campaignArray[] = $campaign_id;
-    
+
     $DropCall = $totalArray['Outbound']['Drop'] + $totalArray['Inbound']['Drop'];
     $TotalCall = $totalArray['Outbound']['Total'] + $totalArray['Inbound']['Total'];
     $result = (($DropCall/$TotalCall)*100);
@@ -1701,15 +1702,15 @@ function get_campaigns_DROP_RATE($database,$campaign_id){
     $DROP = $data[0]['DropsAnswerToday'];
     $Answer = $data[0]['AnswerToday'];
     $Output = (MathZDC($DROP, $Answer)*100);
-    return round($Output,2); 
+    return round($Output,2);
 //<<<<<<< HEAD
-//    return round($result,2); 
+//    return round($result,2);
 //=======
 //>>>>>>> 6ecee07d15e5cbddf4ae8acbd591604f1cac0b25
 }
 
 function get_stats_log($database,$DBUTG,$user,$campaign,$event,$other){
-    
+
     switch($event){
         case 'on_sale':
             $ExistCount = $database->count('vicidial_campaign_statuses',['AND'=>['status'=>$other,'sale'=>'Y','campaign_id'=>[$campaign,NULL]]]);
@@ -1734,7 +1735,7 @@ function get_stats_log($database,$DBUTG,$user,$campaign,$event,$other){
             }
             break;
         default:
-            
+
     }
 }
 
@@ -1755,14 +1756,14 @@ function get_plan_agents($UserGroup,$database,$DBUTG){
         return $result;
 }
 
-function dateDiffInDays($date1, $date2)  
-{ 
-    // Calulating the difference in timestamps 
-    $diff = strtotime($date2) - strtotime($date1); 
-      
-    // 1 day = 24 hours 
-    // 24 * 60 * 60 = 86400 seconds 
-    return abs(round($diff / 86400)); 
+function dateDiffInDays($date1, $date2)
+{
+    // Calulating the difference in timestamps
+    $diff = strtotime($date2) - strtotime($date1);
+
+    // 1 day = 24 hours
+    // 24 * 60 * 60 = 86400 seconds
+    return abs(round($diff / 86400));
 }
 
 function get_agent_logged_in($database,$campaignID){
@@ -1783,5 +1784,15 @@ function get_agent_logged_in($database,$campaignID){
         $array['DEAD'] = 0;
     }
     return $array;
+}
+
+function generateRandomString($length = 10) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
 }
 ?>
