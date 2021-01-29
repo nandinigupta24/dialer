@@ -10247,8 +10247,8 @@ if(webphone) {
 
             }
         } else {
-//            $('#NoneInSessionBox').modal({backdrop: 'static', keyboard: false, show: true});
-//            document.getElementById("NoneInSessionID").innerHTML = session_id;
+          $('#NoneInSessionBox1').modal('show');
+          document.getElementById("NoneInSessionID").innerHTML = session_id;
             $('#phonering_disabled').removeClass('hidden');
         }
         WaitingForNextStep = 1;
@@ -10260,6 +10260,7 @@ if(webphone) {
                 $('#phonering_disabled').addClass('hidden');
 		button_click_log = button_click_log + "" + SQLdate + "-----NoneInSessionOK---|";
 		hideDiv('NoneInSessionBox');
+    $('#NoneInSessionBox1').modal('hide');
 		WaitingForNextStep=0;
 		nochannelinsession=0;
 		}
@@ -10267,6 +10268,7 @@ if(webphone) {
 		{
 		button_click_log = button_click_log + "" + SQLdate + "-----NoneInSessionCalL---|";
 		hideDiv('NoneInSessionBox');
+    $('#NoneInSessionBox1').modal('hide');
                 $('#phonering_disabled').addClass('hidden');
 		WaitingForNextStep=0;
 		nochannelinsession=0;
@@ -13261,6 +13263,7 @@ function CallBackDatE_submit() {
 			hideDiv('CustomerGoneBox');
                         $('#CustomerGonna-Modal').modal('hide');
 			hideDiv('NoneInSessionBox');
+      $('#NoneInSessionBox1').modal('hide');
 			hideDiv('WrapupBox');
 			hideDiv('FSCREENWrapupBox');
 			hideDiv('TransferMain');
@@ -14625,7 +14628,7 @@ setInterval(function(){
 setInterval(function(){
         $.ajax({
                    type:'POST',
-                   url: 'd_files/message.php?method=GetMessage',
+                   url: 'elements/message.php?method=GetMessage',
                    data: {user:user}, // serializes the form's elements.
                    success: function(data)
                    {
@@ -14693,7 +14696,7 @@ setInterval(function(){
 function agent_message_handle(){
     $.ajax({
             type:'POST',
-            url: 'd_files/message.php?method=SeenMessage',
+            url: 'elements/message.php?method=SeenMessage',
             data: {user:user},
             success: function(data)
             {

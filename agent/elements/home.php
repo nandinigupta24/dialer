@@ -53,6 +53,14 @@ $agent_data = $DBUTG->get('agent_page_setting',['id','comment_on_call_recording'
                 right: 7px;
             }
 
+            .card_cc .card{
+              border: 1px solid #ccc !important;
+              background: #78ebf929;
+            }
+            .modal-footer .session_btn{
+              font-size: 15px;
+            }
+
             /* Absolute Center Spinner */
             /*            #cover {
                 position: absolute;

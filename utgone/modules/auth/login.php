@@ -43,7 +43,9 @@ WHERE VUG.status = 'Y' AND VU.user = '".$Username."' AND VU.pass = '".$Password.
             exit;
         }
     }else if ($auth_message == 'BAD') {
-        $_SESSION['msg'] = "You do not have permission to be here";
+        //$_SESSION['msg'] = "You do not have permission to be here";
+
+        $_SESSION['msg'] = "Invalid Username and/or password ";
     }
 }
 ?>

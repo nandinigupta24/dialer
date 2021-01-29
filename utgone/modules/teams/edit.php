@@ -148,19 +148,14 @@
                                         </div>
                         <div class="form-group">
                           <label for="group_name" class="control-label">Agent Status Viewable Groups</label>
+                          <select class="form-control select2" name="agent_status_viewable_groups[]" multiple>
                           <?php if($admin_viewable_groupsALL > 0) { ?>
-                          <div class="form-group">
-                            <?php if (preg_match('/\-\-ALL\-GROUPS\-\-/', $VGROUP_vgroups)) {$checked1 = 'checked';} else {$checked1 = '';} ?>
-                            <input type="checkbox" name="agent_status_viewable_groups[]" value="--ALL-GROUPS--" <?php echo $checked1 ?>>  <span class="bold">ALL-GROUPS</span> - All user groups in the system
-                          </div>
-                          <div class="form-group">
-                            <?php if (preg_match('/\-\-CAMPAIGN\-AGENTS\-\-/', $VGROUP_vgroups)) {$checked2 = 'checked';} else {$checked2 = '';} ?>
-                            <input type="checkbox" name="agent_status_viewable_groups[]" value="--CAMPAIGN-AGENTS--" <?php echo $checked2 ?>>  <span class="bold">CAMPAIGN-AGENTS</span> - All users logged into the same campaign as the agent
-                          </div>
-                          <div class="form-group">
-                            <?php if (preg_match('/\-\-NOT\-LOGGED\-IN\-AGENTS\-\-/', $VGROUP_vgroups)) {$checked3 = 'checked';} else {$checked3 = '';} ?>
-                            <input type="checkbox" name="agent_status_viewable_groups[]" value="--NOT-LOGGED-IN-AGENTS--" <?php echo $checked3 ?>>  <span class="bold">NOT-LOGGED-IN-AGENTS</span> - All users in the system, even not logged-in users
-                          </div>
+                            <?php if (preg_match('/\-\-ALL\-GROUPS\-\-/', $VGROUP_vgroups)) {$selected1 = 'selected';} else {$selected1 = '';} ?>
+                            <option value="--ALL-GROUPS--" <?php echo $selected1 ?>><span class="bold">ALL-GROUPS</span> - All user groups in the system</option>
+                            <?php if (preg_match('/\-\-CAMPAIGN\-AGENTS\-\-/', $VGROUP_vgroups)) {$selected2 = 'selected';} else {$selected2 = '';} ?>
+                            <option value="--CAMPAIGN-AGENTS--" <?php echo $selected2 ?>><span class="bold">CAMPAIGN-AGENTS</span> - All users logged into the same campaign as the agent</option>
+                            <?php if (preg_match('/\-\-NOT\-LOGGED\-IN\-AGENTS\-\-/', $VGROUP_vgroups)) {$selected3 = 'selected';} else {$selected3 = '';} ?>
+                            <option value="--NOT-LOGGED-IN-AGENTS--" <?php echo $selected3 ?>>NOT-LOGGED-IN-AGENTS</span> - All users in the system, even not logged-in users</option>
                           <?php } ?>
                           <?php $stmt="SELECT user_group,group_name from vicidial_user_groups $whereLOGadmin_viewable_groupsSQL order by user_group;";
                     			$rslt=mysql_to_mysqli($stmt, $link);
@@ -176,19 +171,21 @@
                     					{
                     					if (preg_match("/$vgroups_id_value/", $VGROUP_vgroups))
                     						{
-                    						$checked = 'checked';
+                    						$selected = 'selected';
                               } else {
-                                $checked = '';
+                                $selected = '';
                               }
                     					$p++;
                     					}
                           ?>
-                          <div class="form-group">
+                          <!--  <div class="form-group">
                             <input type="checkbox" name="agent_status_viewable_groups[]" value="<?php echo $vgroups_id_value ?>" <?php echo $checked ?>> <span class="bold"><?php echo $vgroups_id_value; ?></span> - <?php echo $vgroups_name_value ?>
-                          </div>
+                          </div>  -->
+                            <option value="<?php echo $vgroups_id_value ?>" <?php echo $selected ?>><span class="bold"><?php echo $vgroups_id_value; ?></span> - <?php echo $vgroups_name_value ?></option>
                           <?php $o++;
                   				} ?>
-                        </div>
+                          </select>
+                          </div>
                         <hr/>
                         <div class="form-group">
                             <button class="btn btn-success" type="submit">Update</button>

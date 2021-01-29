@@ -420,6 +420,32 @@ echo $zi
     </div>
 </span>
 
+<!-- Modal -->
+<div class="modal fade" id="NoneInSessionBox1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-success">
+        <h5 class="modal-title" id="exampleModalLabel" style="margin: 0 auto;">Agent Session <span id="NoneInSessionID"></span></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position: absolute;
+    right: 20px;">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body card_cc">
+        <div class="card">
+          <div class="card-body">
+            <div class="lead"><?php echo _QXZ("No one is in your session");  ?></div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer" style="text-align: right;">
+        <button type="button" class="btn btn-danger btn-app session_btn" onclick="NoneInSessionOK();return false;">Back</button>
+        <button type="button" class="btn btn-default btn-app session_btn" onclick="NoneInSessionCalL();return false;">Call Phone</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <span style="position:absolute;left:0px;top:0px;z-index:<?php $zi++;
       echo $zi ?>;width:100%;height:100%;background-color:#e9e9e9;" id="CustomerGoneBox">
     <table border="0"  width="<?php echo $CAwidth ?>px" height="<?php echo $WRheight ?>px"><tr><td align="center"> <?php echo _QXZ("Customer has hung up:"); ?> <span id="CustomerGoneChanneL"></span><br>
