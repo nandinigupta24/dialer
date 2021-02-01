@@ -1604,9 +1604,6 @@ function set_length(SLnumber,SLlength_goal,SLdirection)
 						var VLAStatuS_array = check_time_array[4].split("Status: ");
 						var VLAStatuS = VLAStatuS_array[1];
 //                                                console.log(VLAStatuS);
-                                                if(VLAStatuS != 'PAUSED'){
-//                                                   clearInterval(MyCallTimer);
-                                                }
                                                 if(VLAStatuS == 'PAUSED' && CamPCalLs > 0){
                                                   if(inbound_call_popup == 'Y') {
                                                     $('#InboundCallBoxModal').modal('show');
@@ -5203,8 +5200,8 @@ $('#CallBackList-listings-dashboard').DataTable().clear().destroy();
 							}
 						else
 							{
-                console.log(manDiaLnext_query);
-                console.log(MDnextResponse);
+                //console.log(manDiaLnext_query);
+                //console.log(MDnextResponse);
 							var MDnextResponse_array=MDnextResponse.split("\n");
 							MDnextCID = MDnextResponse_array[0];
 							LastCallCID = MDnextResponse_array[0];
